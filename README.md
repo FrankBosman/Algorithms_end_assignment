@@ -1,1 +1,2 @@
 Algorithms_end_assignment
+voor de echte strijders
