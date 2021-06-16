@@ -1,18 +1,21 @@
 
 Flock flock;
+Inside inside;
+Outside outside;
 
-float time = 0;//why tho ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Flower flower;
 
 void setup() {
-    size(900, 900);
-    flower = new Flower(new PVector(width/2, height/2));
+    size(1800, 900);
+    inside = new Inside();
+    outside = new Outside();
 }
 
 void draw() {
     background(255);
-    flower.display();
-    flower.update();
+    inside.display();
+    inside.update();
+
+    outside.display();
+    outside.update();
 
 }

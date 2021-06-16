@@ -8,12 +8,12 @@ class FlowerSegment {
     PVector position;
     int segmentLength;
 
-    float DAMPING_CONSTANT = 0.02;
-    float SPRING_CONSTANT = 20;
+    static final float DAMPING_CONSTANT = 0.02;
+    static final float SPRING_CONSTANT = 20;
 
-    FlowerSegment() {
+    FlowerSegment(int segmentLength) {
         segmentColor = color(51, 196, 51); //green
-        segmentLength = 10;
+        this.segmentLength = segmentLength;
         angle = 0;
         velocity = 0;
         force = 0;
