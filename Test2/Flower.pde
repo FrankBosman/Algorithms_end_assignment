@@ -3,9 +3,9 @@
 
 class Flower {
     static final float WIND_FORCE = 0.001;
-    int segmentAmount = 50;
     int segmentSize = 5;
     float radiusFlower = 80;
+    int age;                    //how old the plant is / how much it has grown
     ArrayList<FlowerSegment> segments = new ArrayList<FlowerSegment>();
     PVector position;
     float time;
@@ -17,19 +17,20 @@ class Flower {
     IntList locationBranches = new IntList();
 
 
-    Flower(PVector position) {
-        for (int i = 0; i < segmentAmount; i++) { //constructs the main branch
+    Flower(float x, float y, int startAmount) {
+        for (int i = 0; i < startAmount; i++) { //constructs the main branch
             segments.add(new FlowerSegment(segmentSize));
         }
-        this.position = position;
+        position = new PVector(x,y);
 
-        locationBranches.append(5);
+        // locationBranches.append(5);
         //testing:
-        sideBranches.add(new SideBranch(PI*0.25, 20));
+        // sideBranches.add(new SideBranch(PI*0.25, 20));
 
         petalColor = color(237,188,7);
         pistilColor = color(230,23,59);
         time = 0;
+        age = 0;
     }
     
     void update(){
@@ -51,7 +52,6 @@ class Flower {
                 sideBranches.get(currentBranch).update(segments.get(i));
             }
             segments.get(i).update(velocity, force);
-            
         }    
     }
 
@@ -61,11 +61,13 @@ class Flower {
         pushMatrix();
         translate(position.x, position.y);        
         for(int i = 0; i < segments.size(); i++){
-            if(locationBranches.get(currentBranch) == i){
-                sideBranches.get(currentBranch).display();
-                if(currentBranch < locationBranches.size()-1) currentBranch++;
+                if(locationBranches.size() > 0){
+                if(locationBranches.get(currentBranch) == i){
+                    sideBranches.get(currentBranch).display();
+                    if(currentBranch < locationBranches.size()-1) currentBranch++;
+                }
+                segments.get(i).display();
             }
-            segments.get(i).display();
         } 
         popMatrix();
     }
@@ -83,7 +85,15 @@ class Flower {
         }
     }
 
-    void grow(){
+    void grow(float delta){
+        age += delta;
+
+        if(int(random(0,501)) == 0){
+            locationBranches.append(segments.size());
+            sideBranches.add(new SideBranch(HALF_PI * (random(10, 25)/100), int(random(5, 20)))); //die laatste random moet nog anders
+        }
+
+        segments.add(new FlowerSegment(segmentSize));
 
     }
 }

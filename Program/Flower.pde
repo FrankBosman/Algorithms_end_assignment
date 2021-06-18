@@ -15,11 +15,14 @@ class Flower {
     color petalColor;
     color pistilColor;
 
+    PVector flowerPotPosition;
+
     Flower(PVector position) {
         for (int i = 0; i < segmentAmount; i++) {
             segments.add(new FlowerSegment(segmentSize));
         }
         this.position = position;
+        flowerPotPosition = new PVector(width/2, height*3/4 + 60);
 
         petalColor = color(237,188,7);
         pistilColor = color(230,23,59);
@@ -64,7 +67,41 @@ class Flower {
 
         //reset strokeWeight
         strokeWeight(1);
+      
+        popMatrix();
 
+        drawFlowerPot();
+    }
+
+    void drawFlowerPot() {
+        pushMatrix();
+        translate(flowerPotPosition.x, flowerPotPosition.y);
+
+        //flower pot
+        noStroke();
+        fill(155, 83, 0);
+        beginShape();
+        vertex(-40, height/8 - 30);
+        vertex(-60, 0);
+        vertex(0, 0);
+        vertex(0, height/8 - 30);
+        endShape();
+
+        fill(144, 76, 1);
+        beginShape();
+        vertex(0, height/8 - 30);
+        vertex(0, 0);
+        vertex(60, 0);
+        vertex(40, height/8 - 30);
+        endShape();
+
+        rectMode(CORNER);
+        fill(180, 105, 22);
+        rect(-75, -30, 75, 30, 4, 0, 0, 4);
+        
+        fill(164, 97, 19);
+        rect(0, -30, 75, 30, 0, 4, 4, 0);
+        rectMode(CENTER);
         popMatrix();
     }
 
