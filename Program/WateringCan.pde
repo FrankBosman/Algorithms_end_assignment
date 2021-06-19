@@ -44,26 +44,20 @@ class WateringCan {
   void update() {
     if (!isSelected && !isOnWindowSill()) {
       velocity.y += gravity;
-      if (position.y > height + wateringCanImage.height/2) {
-        position = new PVector(width*3/4, wateringCanImage.height/2);
-      }
+      if (position.y > height + wateringCanImage.height/2) position = new PVector(width*3/4, wateringCanImage.height/2);
       position.add(velocity);
     }
-    if (isOnWindowSill()) {
-      position.y = height*7/8 + 30 - 80;
-    }
+    if (isOnWindowSill()) position.y = height*7/8 + 30 - 80;
 
-    if(isOnWindowSill() || isSelected) {
-        velocity.y = 0;
-    }
+    if (isOnWindowSill() || isSelected) velocity.y = 0;
 
     rotateWateringCan();
   }
 
   boolean isOnWindowSill() {
     return position.y > height*7/8 + 30 - 80 &&
-      position.x > width/8 - 85 - wateringCanImage.width/2 + 81 &&
-      position.x < width*7/8 + 85 + wateringCanImage.width/2 - 25;
+      position.x > width/8 - 85 - wateringCanImage.width/2 + 37 &&
+      position.x < width*7/8 + 85 + wateringCanImage.width/2 - 92;
   }
 
   boolean isOverHandle(float x, float y) {
@@ -87,36 +81,29 @@ class WateringCan {
   void moveWateringCan(float x, float px, float y, float py) {
     if (isSelected) {
       position.x += x - px;
-      if (y < height*7/8 + 30&&
-        x > width/8 - 85 - wateringCanImage.width/2 &&
-        x < width*7/8 + 85 + wateringCanImage.width/2) {
-
-        position.y += y - py;
+      if (y > height*7/8 + 30 - 80 &&
+        x > width/8 - 85 - wateringCanImage.width/2 + 37 &&
+        x < width*7/8 + 85 + wateringCanImage.width/2 - 92) {
+        y += y - py;
       }
 
-      if (isOnWindowSill()) {
-        position.y = height*7/8 + 30 - 80;
-      }
+      if (isOnWindowSill()) position.y = height*7/8 + 30 - 80;
     }
   }
 
   void rotateWateringCan() {
     if (abovePlant() && isSelected) {
-      if (angle > radians(-60)) {
-        angle -= rotationSpeed;
-      } else {
-        isWatering = true;
-      }
+      if (angle > radians(-60)) angle -= rotationSpeed;
+      else isWatering = true;
+      
     } else if ((!abovePlant() || !isSelected) && angle < 0) {
-        angle += rotationSpeed * 2;
-        isWatering = false;
+      angle += rotationSpeed * 2;
+      isWatering = false;
     }
   }
 
   void waterPlants() {
-    if (isWatering) {
-      water.addParticle(new PVector(position.x - 81, position.y - 32));
-    }
+    if (isWatering) water.addParticle(new PVector(position.x - 81, position.y - 32));
   }
 
   void releaseWateringCan() {
