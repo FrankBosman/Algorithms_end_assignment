@@ -5,8 +5,14 @@ class Inside {//this class handels all objects inside the room and the interacti
 
   WateringCan wateringCan;
 
+  PImage[] flowerImages = new PImage[5];
+
   Inside() {
-    plant = new Plant(width/2, height*3/4 + 60, 1);
+    for (int i = 0; i < flowerImages.length; i ++) {
+      flowerImages[i] = loadImage("flower" + i + ".png");
+      flowerImages[i].resize(100, 0);
+    }
+    plant = new Plant(width/2, height*3/4 + 60, 1, flowerImages);
     room = new Room(new PVector(width/2, height/2));
     particleSystem = new ParticleSystem();
     wateringCan = new WateringCan(new PVector(width*3/4, height*7/8 + 30 - 80), particleSystem);

@@ -1,11 +1,16 @@
 class Leaf extends PlantSegment{
+    static final float ANIMATION_TIME = 500;
     float leafSize;
+    float maxLeafSize;
     color leafColor;
+    int cooldown;
 
-    Leaf(float segmentLength, PlantSegment segmentBellow, float offsetAngle, int growTime){
-        super(segmentLength, segmentBellow, offsetAngle, growTime);
-        leafSize = segmentLength*10;
+    Leaf(float segmentLength, PlantSegment segmentBellow, float offsetAngle){
+        super(segmentLength, segmentBellow, offsetAngle, int(ANIMATION_TIME));
+        leafSize = 0;
+        maxLeafSize = segmentLength*10;
         leafColor = color(132, 191, 3);
+        cooldown = growTime;
 
     }
 
@@ -45,7 +50,9 @@ class Leaf extends PlantSegment{
     }
 
     void growAnimation(){
-        
+        //update the grow animation
+        if(growAnimation > 0) growAnimation--;
+        leafSize = maxLeafSize * (1 - growAnimation / ANIMATION_TIME);
     }
 
 }

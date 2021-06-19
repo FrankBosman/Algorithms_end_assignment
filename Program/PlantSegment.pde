@@ -9,7 +9,7 @@ class PlantSegment {
     float force, velocity, angle, totalAngle, offsetAngle;
     PVector position;
     float segmentLength;
-    float grownAnimation;
+    float growAnimation;
     int growTime;; //in frames
 
     PlantSegment segmentBellow;
@@ -20,7 +20,7 @@ class PlantSegment {
         this.segmentLength = segmentLength;
         this.segmentBellow = segmentBellow;
         this.growTime = growTime;
-        grownAnimation = growTime;
+        growAnimation = growTime;
         
         if(segmentBellow == null) {
             isBottom = true;
@@ -47,7 +47,7 @@ class PlantSegment {
         rotate(totalAngle); //rotates the segment to match the flowers' rotation
         stroke(segmentColor);
         strokeWeight(5);
-        line(0, 0, 0, -segmentLength + segmentLength * grownAnimation/growTime); //draws the line of the segment
+        line(0, 0, 0, -segmentLength + segmentLength * growAnimation/growTime); //draws the line of the segment
 
         //reset strokeWeight
         strokeWeight(1);
@@ -77,8 +77,12 @@ class PlantSegment {
             position.y += sin(-(segmentBellow.getTotalAngle() + HALF_PI)) * segmentLength;
         }
 
+        growAnimation();
+    }
+
+    void growAnimation(){
         //update the grow animation
-        if(grownAnimation > 0) grownAnimation--;
+        if(growAnimation > 0) growAnimation--;
     }
 
     void addSegmentAbove(PlantSegment segment){

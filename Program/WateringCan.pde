@@ -35,8 +35,8 @@ class WateringCan {
     line(-120, -71, -81, -32);
     popMatrix();
 
-    fill(0, 0);
-    rect(width/2, height/2, width/4 + 20, height*3/4 + 60);
+    // line(width/8 - 85 - wateringCanImage.width/2 + 37 , height*7/8 + 30 - 80, width*7/8 + 85 + wateringCanImage.width/2 - 92 , height*7/8 + 30 - 80);
+
 
     waterPlants();
   }
@@ -80,12 +80,14 @@ class WateringCan {
 
   void moveWateringCan(float x, float px, float y, float py) {
     if (isSelected) {
-      position.x += x - px;
-      if (y > height*7/8 + 30 - 80 &&
-        x > width/8 - 85 - wateringCanImage.width/2 + 37 &&
-        x < width*7/8 + 85 + wateringCanImage.width/2 - 92) {
-        y += y - py;
-      }
+      position = new PVector(x,y);
+
+      // position.x += x - px;
+      // if (y > height*7/8 + 30 - 80 &&
+      //   x > width/8 - 85 - wateringCanImage.width/2 + 37 &&
+      //   x < width*7/8 + 85 + wateringCanImage.width/2 - 92) {
+      //   position.y += y - py;
+      // }
 
       if (isOnWindowSill()) position.y = height*7/8 + 30 - 80;
     }

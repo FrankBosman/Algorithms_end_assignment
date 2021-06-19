@@ -27,7 +27,9 @@ class Plant {
     color petalColor;
     color pistilColor;
 
-    Plant(float x, float y, int startAmount) {
+    PImage[] flowerImages;
+
+    Plant(float x, float y, int startAmount, PImage[] flowerImages) {
         for (int i = 0; i < startAmount; i++) { //constructs the main branch
             PlantSegment segmentBellow = null;
             if(i > 0) segmentBellow = segments.get(i-1);
@@ -46,6 +48,8 @@ class Plant {
         branchChance = 2; //50%
         intervalSinceBranch = 0;
         previousDirection = "Right";
+
+        this.flowerImages = flowerImages;
     }
     
     void update(){
@@ -84,7 +88,7 @@ class Plant {
 
             boolean createdBranch = false; //check if a branch was created, if that's the case then don't also grow it
 
-            if(branchesLengths.get(0) < float(MAIN_BRANCH_SIZE) * 0.9 && intervalSinceBranch >= BRANCH_INTERVAL){ //don't spawn a branch at the top
+            if(branchesLengths.get(0) < float(MAIN_BRANCH_SIZE) * 0.8 && intervalSinceBranch >= BRANCH_INTERVAL){ //don't spawn a branch at the top
                 if(int(random(0, branchChance)) == 0){ //small chance to create a new branch
                     int index = growLocations.get(0);
                     if(previousDirection.equals("Right")) previousDirection = "Left";
@@ -110,10 +114,16 @@ class Plant {
                 //decide if the branch should end.
                 if(i == 0 && branchesLengths.get(i) > MAIN_BRANCH_SIZE){
                     //add a flower.
+                    PImage flowerImage = flowerImages[int(random(flowerImages.length))];
+                    
+                    segments.add(new Flower(segmentSize, segments.get(segments.size()-1), 0, flowerImage));
+                    segments.get(segments.size()-2).addSegmentAbove(segments.get(segments.size()-1));
+
+
                     isGrowning = false;
                 } else if((i > 0 && branchesLengths.get(i) > random(LOWER_BRANCH_SIZE, UPPER_BRANCH_SIZE)) || (i > 0 && !isGrowning)){ //if the branch reases it's end or if it the plant has stopped growing
-                    //add a flower or blad.
-                    segments.add(new Leaf(segmentSize, segments.get(segments.size()-1), 0, GROW_INTERVAL));
+                    //add a leaf at the end.
+                    segments.add(new Leaf(segmentSize, segments.get(segments.size()-1), 0));
                     segments.get(segments.size()-2).addSegmentAbove(segments.get(segments.size()-1));
 
                     growLocations.remove(i);
