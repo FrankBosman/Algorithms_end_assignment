@@ -105,8 +105,7 @@ class WateringCan {
         isWatering = true;
       }
     } else if ((!abovePlant() || !isSelected) && angle < 0) {
-      angle += rotationSpeed * 2;
-      isWatering = false;
+        angle += rotationSpeed * 2;
     }
   }
 
