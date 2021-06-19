@@ -1,12 +1,12 @@
 class Inside {//this class handels all objects inside the room and the interactions between them 
-  Flower flower;
+  Plant plant;
   Room room;
   ParticleSystem particleSystem;
 
   WateringCan wateringCan;
 
   Inside() {
-    flower = new Flower(width/2, height*3/4 + 60, 1);
+    plant = new Plant(width/2, height*3/4 + 60, 1);
     room = new Room(new PVector(width/2, height/2));
     particleSystem = new ParticleSystem();
     wateringCan = new WateringCan(new PVector(width*3/4, height*7/8 + 30 - 80), particleSystem);
@@ -14,13 +14,13 @@ class Inside {//this class handels all objects inside the room and the interacti
 
   void display() {
     room.display();
-    flower.display();
+    plant.display();
     particleSystem.display();
     wateringCan.display();
   }
 
   void update() {
-    flower.update();
+    plant.update();
     particleSystem.update();
     wateringCan.update();
   }

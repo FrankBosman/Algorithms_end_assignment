@@ -1,9 +1,11 @@
-class Leaf extends FlowerSegment{
-    float segmentWidth;
+class Leaf extends PlantSegment{
+    float leafSize;
+    color leafColor;
 
-    Leaf(float segmentLength, FlowerSegment segmentBellow, float offsetAngle, int growTime){
+    Leaf(float segmentLength, PlantSegment segmentBellow, float offsetAngle, int growTime){
         super(segmentLength, segmentBellow, offsetAngle, growTime);
-        segmentWidth = segmentLength;
+        leafSize = segmentLength*10;
+        leafColor = color(132, 191, 3);
 
     }
 
@@ -11,40 +13,39 @@ class Leaf extends FlowerSegment{
         pushMatrix();
         translate(position.x, position.y);
         rotate(totalAngle); //rotates the segment to match the flowers' rotation
-        // stroke(segmentColor);
-        // strokeWeight(5);
-        // line(0, 0, 0, -segmentLength + segmentLength * grownAnimation/growTime); //draws the line of the segment
-
-        //reset strokeWeight
-        // strokeWeight(1);
 
         //draws leaf:
         noStroke();
-        fill(255);
+
+        //background
+        fill(segmentColor);
         beginShape();
-        vertex(0, 0);
-        bezierVertex(-segmentWidth/4, -segmentWidth*0.175, segmentWidth/10, -segmentLength+segmentWidth*0.1753, segmentWidth/10, -segmentLength);
-        bezierVertex(segmentWidth/10, -segmentLength, segmentWidth*0.425, -segmentWidth/10, 0, 0);
+        vertex(-leafSize/40, 0);
+        bezierVertex(-leafSize/4, -leafSize*0.175, leafSize/10, -leafSize + leafSize*0.1753, leafSize/10, -leafSize);
+        bezierVertex(leafSize/10, -leafSize, leafSize*0.425, -leafSize/10, 0, 0);
         endShape();
-        
-        fill(51, 196, 51);
-        fill(255,0,0);
+
+        //left side
+        fill(leafColor);
         beginShape();
-        vertex(0, 0);
-        bezierVertex(-200, -segmentWidth*0.175, segmentWidth/10, -segmentLength+segmentWidth*0.175, segmentWidth/10, -segmentLength);
-        bezierVertex(segmentWidth/10, -segmentLength, segmentWidth*0.175, -segmentWidth/8, 0, 0);
+        vertex(-leafSize/40, 0);
+        bezierVertex(-leafSize/4, -leafSize*0.175, leafSize/10, -leafSize+leafSize*0.175, leafSize/10, -leafSize);
+        bezierVertex(leafSize/10, -leafSize, leafSize*0.14, -leafSize/8, -leafSize/40, 0);
         endShape();
-            
-        fill(51, 176, 51);
-        fill(0,0,255);
+
+        //right side
+        fill(leafColor);
         beginShape();
-        vertex(segmentWidth/10, -segmentLength);
-        bezierVertex(segmentWidth/10, -segmentLength, segmentWidth*0.425, -segmentWidth/10, 0, 0);
-        bezierVertex(0, 0, segmentWidth*0.175, -segmentWidth/20, segmentWidth/10, -segmentLength);
+        vertex(leafSize/10, -leafSize);
+        bezierVertex(leafSize/10, -leafSize, leafSize*0.425, -leafSize/10, 0, 0);
+        bezierVertex(0, 0, leafSize*0.175, -leafSize/20, leafSize/10, -leafSize);
         endShape();
-        stroke(0);
         
         popMatrix();
+    }
+
+    void growAnimation(){
+        
     }
 
 }

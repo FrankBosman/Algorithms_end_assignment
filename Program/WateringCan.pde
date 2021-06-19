@@ -51,7 +51,10 @@ class WateringCan {
     }
     if (isOnWindowSill()) {
       position.y = height*7/8 + 30 - 80;
-      velocity.y = 0;
+    }
+
+    if(isOnWindowSill() || isSelected) {
+        velocity.y = 0;
     }
 
     rotateWateringCan();
@@ -59,8 +62,8 @@ class WateringCan {
 
   boolean isOnWindowSill() {
     return position.y > height*7/8 + 30 - 80 &&
-      position.x > width/8 - 85 - wateringCanImage.width/2 &&
-      position.x < width*7/8 + 85 + wateringCanImage.width/2;
+      position.x > width/8 - 85 - wateringCanImage.width/2 + 81 &&
+      position.x < width*7/8 + 85 + wateringCanImage.width/2 - 25;
   }
 
   boolean isOverHandle(float x, float y) {

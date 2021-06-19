@@ -1,6 +1,6 @@
 //Flower Segment Class
 
-class FlowerSegment {
+class PlantSegment {
     static final float DAMPING_CONSTANT = 0.02;
     static final float SPRING_CONSTANT = 0.02;
     static final float WIND_FACTOR = 0.001;
@@ -12,11 +12,11 @@ class FlowerSegment {
     float grownAnimation;
     int growTime;; //in frames
 
-    FlowerSegment segmentBellow;
-    ArrayList<FlowerSegment> segmentsAbove = new ArrayList<FlowerSegment>();
+    PlantSegment segmentBellow;
+    ArrayList<PlantSegment> segmentsAbove = new ArrayList<PlantSegment>();
     boolean isBottom; //if it's the bottom segment, so if it has a segment bellow it.
 
-    FlowerSegment(float segmentLength, FlowerSegment segmentBellow, float offsetAngle, int growTime) {
+    PlantSegment(float segmentLength, PlantSegment segmentBellow, float offsetAngle, int growTime) {
         this.segmentLength = segmentLength;
         this.segmentBellow = segmentBellow;
         this.growTime = growTime;
@@ -33,7 +33,7 @@ class FlowerSegment {
             velocity = segmentBellow.getVeloctiy();
         }
 
-        segmentColor = color(51, 196, 51); //green
+        segmentColor = color(94,135,5); //green
         position = new PVector();
 
         angle = 0;
@@ -64,7 +64,7 @@ class FlowerSegment {
         force = SPRING_CONSTANT * angle + friction;                 //calculates the new force
         
         float forceAbove = 0;                                       //init it with 0 so if segmentsAbove is empty it's 0 and so we can sum over it.
-        for(FlowerSegment segment : segmentsAbove){                 //sums the forces from all the segments above
+        for(PlantSegment segment : segmentsAbove){                 //sums the forces from all the segments above
             forceAbove += segment.getForce();
         }
 
@@ -81,7 +81,7 @@ class FlowerSegment {
         if(grownAnimation > 0) grownAnimation--;
     }
 
-    void addSegmentAbove(FlowerSegment segment){
+    void addSegmentAbove(PlantSegment segment){
         segmentsAbove.add(segment);
     }
 

@@ -1,9 +1,9 @@
-//Flower Class
+//Plant Class
 
-class Flower {
+class Plant {
     //constants
-    static final int UPPER_BRANCH_SIZE = 10;
-    static final int LOWER_BRANCH_SIZE = 5;
+    static final int UPPER_BRANCH_SIZE = 5;
+    static final int LOWER_BRANCH_SIZE = 2;
     static final int MAIN_BRANCH_SIZE = 30;
     static final int GROW_INTERVAL = 30;    //in frames
     static final int BRANCH_INTERVAL = 2;   //in segments
@@ -15,7 +15,7 @@ class Flower {
     boolean isGrowning; //if the plant is still growing its branches
     IntList growLocations = new IntList(); //the indexes where the plant can grow from
     IntList branchesLengths = new IntList(); //stores the length of the growing branches.
-    ArrayList<FlowerSegment> segments = new ArrayList<FlowerSegment>(); //stores the segments as a linked list
+    ArrayList<PlantSegment> segments = new ArrayList<PlantSegment>(); //stores the segments as a linked list
     String previousDirection;
 
     int segmentSize = 10;
@@ -27,11 +27,11 @@ class Flower {
     color petalColor;
     color pistilColor;
 
-    Flower(float x, float y, int startAmount) {
+    Plant(float x, float y, int startAmount) {
         for (int i = 0; i < startAmount; i++) { //constructs the main branch
-            FlowerSegment segmentBellow = null;
+            PlantSegment segmentBellow = null;
             if(i > 0) segmentBellow = segments.get(i-1);
-            segments.add(new FlowerSegment(segmentSize, segmentBellow, 0, GROW_INTERVAL));
+            segments.add(new PlantSegment(segmentSize, segmentBellow, 0, GROW_INTERVAL));
 
             if(i > 0) segmentBellow.addSegmentAbove(segments.get(i));
         }
@@ -52,7 +52,7 @@ class Flower {
         wind();       
         time+= 1/frameRate;
 
-        for(FlowerSegment segment : segments){
+        for(PlantSegment segment : segments){
             segment.update();
         } 
 
@@ -63,7 +63,7 @@ class Flower {
     void display() {
         pushMatrix();
         translate(position.x, position.y);
-        for(FlowerSegment segment : segments){
+        for(PlantSegment segment : segments){
             segment.display();
         }
 
@@ -72,7 +72,7 @@ class Flower {
     }
 
     void wind(){
-        for(FlowerSegment segment : segments){
+        for(PlantSegment segment : segments){
             if(segment.isTopSegment()) segment.wind(time); //add wind to the top of the plant
         }
     }
@@ -90,7 +90,7 @@ class Flower {
                     if(previousDirection.equals("Right")) previousDirection = "Left";
                     else previousDirection = "Right";
 
-                    segments.add(new FlowerSegment(segmentSize, segments.get(index), (previousDirection.equals("Left") ? -1 : 1) * random(HALF_PI/4, HALF_PI/2), GROW_INTERVAL));
+                    segments.add(new PlantSegment(segmentSize, segments.get(index), (previousDirection.equals("Left") ? -1 : 1) * random(HALF_PI/4, HALF_PI/2), GROW_INTERVAL));
                     growLocations.append(segments.size()-1);
                     branchesLengths.append(1);
                     createdBranch = true;
@@ -102,7 +102,7 @@ class Flower {
             //growns the flower on all the growing places
             for(int i = 0; i < growLocations.size() - (createdBranch ? 1 : 0); i++){ //if a branch was created then don't loop until the end.
                 int index = growLocations.get(i);
-                segments.add(new FlowerSegment(segmentSize, segments.get(index), 0, GROW_INTERVAL));
+                segments.add(new PlantSegment(segmentSize, segments.get(index), 0, GROW_INTERVAL));
                 segments.get(index).addSegmentAbove(segments.get(segments.size()-1));
                 growLocations.set(i, segments.size()-1);
                 branchesLengths.add(i, 1);
