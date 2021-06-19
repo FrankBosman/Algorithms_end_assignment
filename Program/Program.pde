@@ -31,7 +31,7 @@ void mousePressed() {
 }
 
 void mouseDragged() {
-    inside.dragged(mouseX, pmouseX);
+    inside.dragged(mouseX, pmouseX, mouseY, pmouseY);
 }
 
 void mouseReleased() {
