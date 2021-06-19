@@ -9,6 +9,8 @@ void draw() {
     flower.update();
     flower.display();
 
-    if(frameCount % 30 == 0) flower.grow();
+   flower.grow();
+
+   if(flower.branchesLengths.get(0) >= flower.MAIN_BRANCH_SIZE) flower = new Flower(width/2, height*0.75, 1);
 }
 

@@ -1,39 +1,47 @@
 //Flower Segment Class
 
 class FlowerSegment {
+    static final float DAMPING_CONSTANT = 0.02;
+    static final float SPRING_CONSTANT = 0.01;
+    static final float WIND_FACTOR = 0.001;
 
     color segmentColor;
     float force, velocity, angle, totalAngle, offsetAngle;
     PVector position;
     float segmentLength;
     float grownAnimation;
-
-    static final float DAMPING_CONSTANT = 0.02;
-    static final float SPRING_CONSTANT = 0.01;
-    static final float WIND_FACTOR = 0.001;
+    int growTime;; //in frames
 
     FlowerSegment segmentBellow;
     ArrayList<FlowerSegment> segmentsAbove = new ArrayList<FlowerSegment>();
     boolean isBottom; //if it's the bottom segment, so if it has a segment bellow it.
 
-    FlowerSegment(float segmentLength, FlowerSegment segmentBellow, float offsetAngle) {
+    FlowerSegment(float segmentLength, FlowerSegment segmentBellow, float offsetAngle, int growTime) {
         this.segmentLength = segmentLength;
         this.segmentBellow = segmentBellow;
+        this.growTime = growTime;
+        grownAnimation = growTime;
         
-        if(segmentBellow == null) isBottom = true;
-        else isBottom = false;
+        if(segmentBellow == null) {
+            isBottom = true;
+            force = 0;
+            velocity = 0;
+        }
+        else {
+            isBottom = false;
+            force = segmentBellow.getForce();
+            velocity = segmentBellow.getVeloctiy();
+        }
 
         segmentColor = color(51, 196, 51); //green
         position = new PVector();
 
         angle = 0;
         totalAngle = 0;
-        if(offsetAngle != 0 && int(random(0,2)) == 0) this.offsetAngle = -offsetAngle; //50%  to invert the offset angle of the branch
+        if(offsetAngle != 0 && int(random(0, 2)) == 0) this.offsetAngle = -offsetAngle; //50%  to invert the offset angle of the branch
         else this.offsetAngle = offsetAngle;
-        velocity = 0;
-        force = 0;
-
-        grownAnimation = 10;
+        // velocity = 0;
+        // force = 0;
     }
 
     void display() {
@@ -42,15 +50,13 @@ class FlowerSegment {
         rotate(totalAngle); //rotates the segment to match the flowers' rotation
         stroke(segmentColor);
         strokeWeight(5);
-        line(0, 0, 0, -segmentLength + segmentLength * grownAnimation/10); //draws the line of the segment
+        line(0, 0, 0, -segmentLength + segmentLength * grownAnimation/growTime); //draws the line of the segment
 
         //reset strokeWeight
         strokeWeight(1);
         
         popMatrix();
     }
-
-   
 
     void update() {
         float tempVelocity = 0;

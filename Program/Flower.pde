@@ -1,81 +1,134 @@
 //Flower Class
-//Adapted from Topic 6 Assignments 1, 2 and 3 made by Jelle Gerritsen and Sterre Kuijper
 
 class Flower {
-    static final float WIND_FORCE = 0.001;
-    int segmentAmount = 50;
-    int segmentSize = 5;
+    //constants
+    static final int UPPER_BRANCH_SIZE = 10;
+    static final int LOWER_BRANCH_SIZE = 5;
+    static final int MAIN_BRANCH_SIZE = 30;
+    static final int GROW_INTERVAL = 30;    //in frames
+    static final int BRANCH_INTERVAL = 2;   //in segments
+
+    //branches/growing
+    float branchChance;
+    int intervalSinceBranch;
+    int growTimer;
+    boolean isGrowning; //if the plant is still growing its branches
+    IntList growLocations = new IntList(); //the indexes where the plant can grow from
+    IntList branchesLengths = new IntList(); //stores the length of the growing branches.
+    ArrayList<FlowerSegment> segments = new ArrayList<FlowerSegment>(); //stores the segments as a linked list
+    String previousDirection;
+
+    int segmentSize = 10;
     float radiusFlower = 80;
-    ArrayList<FlowerSegment> segments = new ArrayList<FlowerSegment>();
     PVector position;
     float time;
 
-    float xoff = 0.0;
-
+    //colors
     color petalColor;
     color pistilColor;
 
-    PVector flowerPotPosition;
+    Flower(float x, float y, int startAmount) {
+        for (int i = 0; i < startAmount; i++) { //constructs the main branch
+            FlowerSegment segmentBellow = null;
+            if(i > 0) segmentBellow = segments.get(i-1);
+            segments.add(new FlowerSegment(segmentSize, segmentBellow, 0, GROW_INTERVAL));
 
-    Flower(PVector position) {
-        for (int i = 0; i < segmentAmount; i++) {
-            segments.add(new FlowerSegment(segmentSize));
+            if(i > 0) segmentBellow.addSegmentAbove(segments.get(i));
         }
-        this.position = position;
-        flowerPotPosition = new PVector(width/2, height*3/4 + 60);
+        branchesLengths.append(startAmount);
+        growLocations.append(startAmount-1);
+        position = new PVector(x,y);
 
         petalColor = color(237,188,7);
         pistilColor = color(230,23,59);
         time = 0;
+        isGrowning = true;
+        branchChance = 2; //50%
+        intervalSinceBranch = 0;
+        previousDirection = "Right";
     }
     
     void update(){
+        wind();       
         time+= 1/frameRate;
-        for(int i = 0; i < segments.size(); i++){
-            float velocity;
-            float force;
 
-            if (i == 0) velocity = 0;
-            else velocity = segments.get(i-1).velocity;
-            
-            if (i == segments.size() - 1) force = 0;
-            else force = segments.get(i + 1).force; 
+        for(FlowerSegment segment : segments){
+            segment.update();
+        } 
 
-            segments.get(i).update(velocity, force);
-            
-        }    
+        grow(); //TEMP
     }
+
 
     void display() {
-        wind();
         pushMatrix();
-        translate(position.x, position.y);        
-        for(int i = 0; i < segments.size(); i++){
-            segments.get(i).display();
-        } 
-        
-        noStroke();
-        fill(petalColor);        
-        pushMatrix();
-            for(int i = 0; i<8; i++){
-                rotate(TWO_PI/8);
-                ellipse(radiusFlower*0.75, 0, radiusFlower, radiusFlower*0.75);
-            }
-        popMatrix();
-        fill(pistilColor);
-        circle(0, 0, radiusFlower);
-
-        //reset strokeWeight
-        strokeWeight(1);
-      
-        popMatrix();
+        translate(position.x, position.y);
+        for(FlowerSegment segment : segments){
+            segment.display();
+        }
 
         drawFlowerPot();
+        popMatrix();
     }
 
-    void drawFlowerPot() {
+    void wind(){
+        for(FlowerSegment segment : segments){
+            if(segment.isTopSegment()) segment.wind(time); //add wind to the top of the plant
+        }
+    }
+
+    void grow(){
+        growTimer -= 1/frameRate;
+        if(isGrowning && frameCount % GROW_INTERVAL == 0){
+            growTimer = GROW_INTERVAL;
+
+            boolean createdBranch = false; //check if a branch was created, if that's the case then don't also grow it
+
+            if(branchesLengths.get(0) < float(MAIN_BRANCH_SIZE) * 0.9 && intervalSinceBranch >= BRANCH_INTERVAL){ //don't spawn a branch at the top
+                if(int(random(0, branchChance)) == 0){ //small chance to create a new branch
+                    int index = growLocations.get(0);
+                    if(previousDirection.equals("Right")) previousDirection = "Left";
+                    else previousDirection = "Right";
+
+                    segments.add(new FlowerSegment(segmentSize, segments.get(index), (previousDirection.equals("Left") ? -1 : 1) * random(HALF_PI/4, HALF_PI/2), GROW_INTERVAL));
+                    growLocations.append(segments.size()-1);
+                    branchesLengths.append(1);
+                    createdBranch = true;
+                    
+                    intervalSinceBranch = 0;
+                }
+            }
+
+            //growns the flower on all the growing places
+            for(int i = 0; i < growLocations.size() - (createdBranch ? 1 : 0); i++){ //if a branch was created then don't loop until the end.
+                int index = growLocations.get(i);
+                segments.add(new FlowerSegment(segmentSize, segments.get(index), 0, GROW_INTERVAL));
+                segments.get(index).addSegmentAbove(segments.get(segments.size()-1));
+                growLocations.set(i, segments.size()-1);
+                branchesLengths.add(i, 1);
+                
+                //decide if the branch should end.
+                if(i == 0 && branchesLengths.get(i) > MAIN_BRANCH_SIZE){
+                    //add a flower.
+                    isGrowning = false;
+                } else if((i > 0 && branchesLengths.get(i) > random(LOWER_BRANCH_SIZE, UPPER_BRANCH_SIZE)) || (i > 0 && !isGrowning)){ //if the branch reases it's end or if it the plant has stopped growing
+                    //add a flower or blad.
+                    segments.add(new Leaf(segmentSize, segments.get(segments.size()-1), 0, GROW_INTERVAL));
+                    segments.get(segments.size()-2).addSegmentAbove(segments.get(segments.size()-1));
+
+                    growLocations.remove(i);
+                    branchesLengths.remove(i);
+                }
+            }
+            
+            intervalSinceBranch++;
+        }
+
+    }
+
+    void drawFlowerPot() { //draws the flowerpot
         pushMatrix();
-        translate(flowerPotPosition.x, flowerPotPosition.y);
+        // translate(flowerPotPosition.x, flowerPotPosition.y);
 
         //flower pot
         noStroke();
@@ -103,18 +156,5 @@ class Flower {
         rect(0, -30, 75, 30, 0, 4, 4, 0);
         rectMode(CENTER);
         popMatrix();
-    }
-
-    void addForce(float power){
-        segments.get(segments.size() - 1).force = power;
-    }
-
-    void wind(){
-        float n = noise(position.x + time, position.y) * WIND_FORCE;
-        segments.get(segments.size() - 1).force = n;
-    }
-
-    void grow(){
-
     }
 }

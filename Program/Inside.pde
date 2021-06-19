@@ -6,7 +6,7 @@ class Inside {//this class handels all objects inside the room and the interacti
   WateringCan wateringCan;
 
   Inside() {
-    flower = new Flower(new PVector(width/2, height*3/4 + 60));
+    flower = new Flower(width/2, height*3/4 + 60, 1);
     room = new Room(new PVector(width/2, height/2));
     particleSystem = new ParticleSystem();
     wateringCan = new WateringCan(new PVector(width*3/4, height*7/8 + 30 - 80), particleSystem);

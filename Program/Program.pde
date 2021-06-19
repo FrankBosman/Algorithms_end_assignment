@@ -24,6 +24,9 @@ void draw() {
     outside.display();
     outside.update();
 
+    fill(0);
+    text(frameRate, 5, 20);
+
 }
 
 void mousePressed() {
