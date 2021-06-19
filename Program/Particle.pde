@@ -5,12 +5,14 @@ class Particle {
   PVector position;
   PVector velocity;
   PVector acceleration;
+  
+  float gravity;
 
   float radius;
-  Particle(PVector position) {
+  Particle(PVector position, PVector direction) {
     this.position = position.copy();
-    velocity = new PVector(random(-1, 1), random(-1, 1));
-    acceleration = velocity.copy().setMag(random(0.01, 0.2));
+    velocity = direction.copy().setMag(random(5, 15));
+    gravity = 1;
 
     radius = 5;
     lifespan = 255;
@@ -23,8 +25,8 @@ class Particle {
   }
 
   void update() {
+    velocity.y += gravity;
     position.add(velocity);
-    velocity.add(acceleration);
     lifespan--;
   }
 

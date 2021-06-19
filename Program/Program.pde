@@ -1,10 +1,10 @@
-Flock flock;
 Inside inside;
 Outside outside;
 
 PImage landscape;
 
 void setup() {
+  //fullScreen();
   size(1800, 900);
   rectMode(CENTER);
   imageMode(CENTER);
@@ -29,6 +29,7 @@ void draw() {
 
 void mousePressed() {
   inside.clicked(mouseX, mouseY);
+  println(mouseX, mouseY);
 }
 
 void mouseDragged() {

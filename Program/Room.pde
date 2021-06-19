@@ -3,7 +3,7 @@ class Room {
   PVector position;
   PVector positionLeftWindow;
   boolean isSelected;
-
+  
   Room(PVector position) {
     this.position = position;
     positionLeftWindow = new PVector(-width/4 - 20, 0);
@@ -13,9 +13,7 @@ class Room {
   void display() {
     pushMatrix();
     translate(position.x, position.y);
-
-
-
+    
     //wall
     strokeWeight(width/8);
     stroke(195, 166, 142);
@@ -154,6 +152,10 @@ class Room {
       x < position.x + positionLeftWindow.x - width/8 + 7 && 
       y > position.y + positionLeftWindow.y - 55 && 
       y < position.y + positionLeftWindow.y + 55);
+  }
+  
+  boolean windowIsOpen() {
+   return  positionLeftWindow.x == -40.0;
   }
 
   void selectWindow(float x, float y) {
