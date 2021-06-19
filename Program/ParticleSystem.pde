@@ -21,7 +21,7 @@ class ParticleSystem {
       }
     }
   }
-  
+
   void addParticle(PVector position) {
     particles.add(new Particle(new PVector(position.x, position.y)));
   }

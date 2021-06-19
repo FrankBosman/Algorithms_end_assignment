@@ -13,9 +13,9 @@ class Room {
   void display() {
     pushMatrix();
     translate(position.x, position.y);
-    
-    
-    
+
+
+
     //wall
     strokeWeight(width/8);
     stroke(195, 166, 142);

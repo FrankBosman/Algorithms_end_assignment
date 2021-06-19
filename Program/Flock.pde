@@ -1,6 +1,5 @@
-class Flock{
-    
-    Flock(){
-        
-    }
+class Flock {
+
+  Flock() {
+  }
 }

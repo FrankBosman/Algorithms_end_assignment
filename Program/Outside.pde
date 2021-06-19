@@ -1,15 +1,14 @@
-class Outside{//this class handels all objects Outside the room and the interactions between them 
+class Outside {//this class handels all objects Outside the room and the interactions between them 
 
-    Outside(){
-    }
+  Outside() {
+  }
 
-    void display(){
-    }
+  void display() {
+  }
 
-    void update(){
-    }
+  void update() {
+  }
 
-    void drawBackground(){
-
-    }
+  void drawBackground() {
+  }
 }

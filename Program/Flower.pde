@@ -1,36 +1,34 @@
-class Flower extends PlantSegment{
-    static final float ANIMATION_TIME = 100;
-    float flowerSize;
-    float maxFlowerSize;
-    int cooldown;
+class Flower extends PlantSegment {
+  static final float ANIMATION_TIME = 100;
+  float flowerSize;
+  float maxFlowerSize;
+  int cooldown;
 
-    PImage flowerImage;
+  PImage flowerImage;
 
-    Flower(float segmentLength, PlantSegment segmentBellow, float offsetAngle, PImage flowerImage){
-        super(segmentLength, segmentBellow, offsetAngle, int(ANIMATION_TIME));
-        flowerSize = 0;
-        maxFlowerSize = segmentLength*10;
-        cooldown = growTime;
+  Flower(float segmentLength, PlantSegment segmentBellow, float offsetAngle, PImage flowerImage) {
+    super(segmentLength, segmentBellow, offsetAngle, int(ANIMATION_TIME));
+    flowerSize = 0;
+    maxFlowerSize = segmentLength*10;
+    cooldown = growTime;
 
-        this.flowerImage = flowerImage;
+    this.flowerImage = flowerImage;
+  }
 
-    }
+  void display() {
+    pushMatrix();
+    translate(position.x, position.y);
+    rotate(totalAngle);
 
-     void display() {
-        pushMatrix();
-        translate(position.x, position.y);
-        rotate(totalAngle);
+    image(flowerImage, 0, 0);
+    popMatrix();
+  }
 
-        image(flowerImage, 0, 0);
-        popMatrix();
-    }
-
-    void growAnimation(){
-        //update the grow animation
-        // if(growAnimation > 0) growAnimation--;
-        // if(growAnimation <= ANIMATION_TIME){
-            // leafSize = maxLeafSize * (1 - growAnimation / ANIMATION_TIME);
-        // }
-    }
-
+  void growAnimation() {
+    //update the grow animation
+    // if(growAnimation > 0) growAnimation--;
+    // if(growAnimation <= ANIMATION_TIME){
+    // leafSize = maxLeafSize * (1 - growAnimation / ANIMATION_TIME);
+    // }
+  }
 }
