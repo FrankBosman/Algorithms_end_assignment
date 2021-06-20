@@ -13,6 +13,7 @@ class Particle {
   Plant plant;
 
   float radius;
+
   Particle(PVector position, PVector direction, PVector windowStillPos, float windowStillWidth) {
     this.position = position.copy();
     this.windowStillPos = windowStillPos;
@@ -60,5 +61,9 @@ class Particle {
 
   void kill(){
     lifespan = 0;
+  }
+
+  float getForceDown() {
+    return gravity;
   }
 }

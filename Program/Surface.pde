@@ -1,3 +1,9 @@
+/*  -- Surface Class --
+ *  This Class displays, handles the water segments and the interactions between them
+ *  It also handles the interaction between te water and the particles
+ *  Adapted from topic 6 assignment 6.6, made by Ysbrand Burgstede, Frank Bosman.
+ */
+
 class Surface {
   float levelHeight;
   PVector pos;
@@ -5,8 +11,8 @@ class Surface {
   ArrayList<WaterSegment> segments = new ArrayList<WaterSegment>();
 
   Surface(PVector pos, float initWidth, float initHeight, int segmentSize) {
-    for (int i = 0; i < int(initWidth / segmentSize); i++) {
-      segments.add(new WaterSegment(new PVector(segmentSize/2 + i*segmentSize, 0), segmentSize));
+    for (int i = 0; i < int(initWidth / segmentSize); i++) {//setup the segments that will form the water
+      segments.add(new WaterSegment(new PVector(segmentSize/2 + i*segmentSize, 0), segmentSize, this));
     }
 
     this.pos = pos;
@@ -45,19 +51,20 @@ class Surface {
     popMatrix();
   }
 
+  //the methoud adds force to the water, it returns if it was succesfull
   boolean addAreaForce(float x, float y, int dist, float multiplier) {
     boolean hit = false;
     for (WaterSegment segment : segments) {
-      if (segment.distance(x, y) <= dist) {
-        //segment.addForce(segment.distVect(new PVector(x,y)).y * segment.springConst);
-        segment.addForce((dist-segment.distance(x, y)) * multiplier);
+      if (segment.distance(x, y, pos) <= dist) {
+        segment.addForce((dist-segment.distance(x, y, pos)) * multiplier);
         hit = true;
       }
     }
+    if(hit) levelHeight -= 0.1; //increase the water level
     return hit;
   }
 
   boolean hit(PVector posIn){
-    // if(posIn.y >= pos.y + levelHeight &&)
+    return posIn.y >= pos.y + levelHeight && posIn.x >= pos.x && posIn.x <= pos.x + waterSize.x;
   }
 }

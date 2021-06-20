@@ -1,6 +1,7 @@
 
 /*  -- Glass Class --
  *  This Class displays the glass.
+ *  and it handles the surface which can be changed by throwing water on it
  */
 
 class Glass {
@@ -13,7 +14,7 @@ class Glass {
 
   Glass(PVector position) {
     this.position = position.sub(0, GLASS_HEIGHT/2); //move the pos coordinate so the glass sits on the given coordinate
-    surface = new Surface(PVector.add(position, new PVector(-GLASS_WIDTH/2 + STROKE_WEIGHT/2, -STROKE_WEIGHT)), GLASS_WIDTH - STROKE_WEIGHT, GLASS_HEIGHT/2, 10);
+    surface = new Surface(PVector.add(position, new PVector(-GLASS_WIDTH/2 + STROKE_WEIGHT/2, -STROKE_WEIGHT)), GLASS_WIDTH - STROKE_WEIGHT, GLASS_HEIGHT/2, 2); //creates the surface that handles the water
   }
 
   void display() {
@@ -21,8 +22,8 @@ class Glass {
     translate(position.x, position.y);
 
     strokeWeight(STROKE_WEIGHT);
-    stroke(174, 232, 240);
-    fill(174, 232, 240, 127);
+    stroke(174, 232, 240);    //light blue
+    fill(174, 232, 240, 127); //light blue
     rect(0, 0, GLASS_WIDTH, GLASS_HEIGHT, 5, 5, 10, 10);
 
     popMatrix();
@@ -31,5 +32,15 @@ class Glass {
 
     surface.update();
     surface.display();
+  }
+
+  void collide(Particle particle){
+    //test if the particle hit the glass
+    PVector posIn = particle.getPos();
+    if(posIn.y >= position.y - GLASS_HEIGHT/2 && posIn.y <= position.y + GLASS_HEIGHT/2 && //test the Y coords
+    ((posIn.x >= position.x - GLASS_WIDTH/2 - STROKE_WEIGHT*3 && posIn.x <= position.x - GLASS_WIDTH/2 + STROKE_WEIGHT*3) || //test the x coords of the left wall
+    (posIn.x >= position.x + GLASS_WIDTH/2 - STROKE_WEIGHT*3 && posIn.x <= position.x + GLASS_WIDTH/2 + STROKE_WEIGHT*3))){  //test the x coords of the right wall
+      particle.velocity.x *= -1;      
+    }
   }
 }

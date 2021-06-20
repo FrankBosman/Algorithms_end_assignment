@@ -3,6 +3,7 @@ class ParticleSystem {
   PVector windowStillPos;
   float windowStillWidth;
   Plant plant;
+  Glass glass;
 
   ParticleSystem(PVector windowStillPos, float windowStillWidth, Plant plant, Glass glass) {
     particles = new ArrayList<Particle>();
@@ -10,6 +11,7 @@ class ParticleSystem {
     this.windowStillPos = windowStillPos;
     this.windowStillWidth = windowStillWidth;
     this.plant = plant;
+    this.glass = glass;
   }
 
   void display() {
@@ -30,7 +32,12 @@ class ParticleSystem {
       }
 
       //test if the particle hits the surface
-      // if (particle.getPos().y >= glass.surface.getPos()) 
+      if (glass.surface.hit(particle.getPos())){
+        if (glass.surface.addAreaForce(particle.getPos().x, particle.getPos().y, int(particle.radius*2), particle.getForceDown()/10)) particle.kill(); //check if it actually hit an segment of the surface and then removes itself.
+      }
+
+      //test if the particle hit the glass
+      glass.collide(particle);
 
       if (particle.isDead()) {
         particles.remove(i);
