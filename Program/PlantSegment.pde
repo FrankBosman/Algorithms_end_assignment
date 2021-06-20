@@ -3,7 +3,6 @@
 class PlantSegment {
   static final float DAMPING_CONSTANT = 0.02;
   static final float SPRING_CONSTANT = 0.02;
-  static final float WIND_FACTOR = 0.001;
 
   color segmentColor;
   float force, velocity, angle, totalAngle, offsetAngle;
@@ -55,7 +54,7 @@ class PlantSegment {
     popMatrix();
   }
 
-  void update() {
+  void update(boolean hydrated) {
     float tempVelocity = 0;
     if (!isBottom) tempVelocity = velocity - segmentBellow.getVeloctiy(); //calculates the temp velocity to be used in the calculations. if there is a segment bellow it 
 
@@ -77,7 +76,7 @@ class PlantSegment {
       position.y += sin(-(segmentBellow.getTotalAngle() + HALF_PI)) * segmentLength;
     }
 
-    growAnimation();
+    if(hydrated) growAnimation();
   }
 
   void growAnimation() {
@@ -89,8 +88,8 @@ class PlantSegment {
     segmentsAbove.add(segment);
   }
 
-  void wind(float time) {
-    float windForce = noise(position.x + time, position.y) * WIND_FACTOR;
+  void wind(float time, float windFactor) {
+    float windForce = noise(position.x + time, position.y) * windFactor;
     force = windForce;
   }
 

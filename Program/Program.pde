@@ -1,41 +1,37 @@
-Inside inside;
 Outside outside;
-
-PImage landscape;
+Room room;
 
 void setup() {
   //fullScreen();
-  size(1800, 900);
+  size(1800, 900, P2D);
   rectMode(CENTER);
   imageMode(CENTER);
-  inside = new Inside();
-  outside = new Outside();
+  room = new Room(new PVector(width/2, height/2));
 
-  landscape = loadImage("landscape2.png");
-  landscape.resize(width*7/8, 0);
+  outside = new Outside();
 }
 
 void draw() {
-  image(landscape, width/2, height/2);  
-  inside.display();
-  inside.update();
-
+  background(100);
   outside.display();
   outside.update();
+
+  room.display();
+  room.update();
 
   fill(0);
   text(frameRate, 5, 20);
 }
 
 void mousePressed() {
-  inside.clicked(mouseX, mouseY);
+  room.clicked(mouseX, mouseY);
   println(mouseX, mouseY);
 }
 
 void mouseDragged() {
-  inside.dragged(mouseX, pmouseX, mouseY, pmouseY);
+  room.dragged(mouseX, pmouseX, mouseY, pmouseY);
 }
 
 void mouseReleased() {
-  inside.released();
+  room.released();
 }

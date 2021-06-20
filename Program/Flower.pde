@@ -20,15 +20,15 @@ class Flower extends PlantSegment {
     translate(position.x, position.y);
     rotate(totalAngle);
 
-    image(flowerImage, 0, 0);
+    image(flowerImage, 0, 0, flowerImage.width * flowerSize, flowerImage.height * flowerSize);
     popMatrix();
   }
 
   void growAnimation() {
     //update the grow animation
-    // if(growAnimation > 0) growAnimation--;
-    // if(growAnimation <= ANIMATION_TIME){
-    // leafSize = maxLeafSize * (1 - growAnimation / ANIMATION_TIME);
-    // }
+    if(growAnimation > 0) growAnimation--;
+      if(growAnimation <= ANIMATION_TIME){
+      flowerSize = (1 - growAnimation / ANIMATION_TIME);
+    }
   }
 }
