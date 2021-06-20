@@ -49,14 +49,14 @@ class Plant {
     }
     branchesLengths.append(startAmount); //writes down the current branch length
     growLocations.append(startAmount-1); //add the main brach as a grow location
-    
+
     position = new PVector(x, y);
     this.flowerImages = flowerImages; //the flower array from which one will be choosen.
 
     //wind:
     time = 0;
     this.windows = windows;
-    
+
     //setup for growing:
     isGrowning = true;
     branchChance = 2; //50%
@@ -84,7 +84,7 @@ class Plant {
     //update all the segments
     for (PlantSegment segment : segments) {
       segment.update(hydratedTimer > 0);
-    } 
+    }
   }
 
   void display() {
@@ -102,7 +102,7 @@ class Plant {
 
   void grow() { //this function is resonsible for growing the plant, it adds new segments, this can be normal segments, leafs or the flower.
     if (isGrowning && frameCount % GROW_INTERVAL == 0 && hydratedTimer > 0) {
-      
+
       //update the timers
       growTimer = GROW_INTERVAL;
 
@@ -155,11 +155,11 @@ class Plant {
     }
   }
 
-  void hydrate(){ //hydrates the plant so it can continue growing
+  void hydrate() { //hydrates the plant so it can continue growing
     hydratedTimer = 0.5;
   }
 
-  boolean isInFlowerPot(PVector posIn){ //if the vector is inside the flower pot
+  boolean isInFlowerPot(PVector posIn) { //if the vector is inside the flower pot
     return abs(position.y - posIn.y) <= height/30 && abs(position.x - posIn.x) <= flowerPotWidth;
   }
 

@@ -31,8 +31,8 @@ class Flower extends PlantSegment {
 
   void growAnimation() {
     //update the grow animation
-    if(growAnimation > 0) growAnimation--;
-      if(growAnimation <= ANIMATION_TIME){
+    if (growAnimation > 0) growAnimation--;
+    if (growAnimation <= ANIMATION_TIME) {
       flowerSize = (1 - growAnimation / ANIMATION_TIME);
     }
   }

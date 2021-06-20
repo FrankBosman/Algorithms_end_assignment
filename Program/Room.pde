@@ -2,7 +2,7 @@
 /*  -- Room Class --
  *  this class handels all objects inside the room and the interactions between them 
  */
- 
+
 class Room {
 
   Plant plant;
@@ -17,7 +17,7 @@ class Room {
 
   float windowSillHeight;
   PImage wateringCanImage;
-  
+
   Room(PVector position) {
     this.position = position;
 
@@ -29,9 +29,9 @@ class Room {
     tulipImage = loadImage("tulip.png");
     tulipImage.resize(0, 300);
 
-    windows = new Windows(new PVector(-width/4 - 20, 0),  position);
+    windows = new Windows(new PVector(-width/4 - 20, 0), position);
     plant = new Plant(width/2, height*3/4 + 60, 1, flowerImages, windows);
-    
+
     glass = new Glass(new PVector(width*7/8, windowSillHeight), tulipImage);
     particleSystem = new ParticleSystem(new PVector(position.x, windowSillHeight), width*3/4 + 150, plant, glass);
 
@@ -50,10 +50,9 @@ class Room {
     particleSystem.display();
     glass.display();
     if (!wateringCan.isOutside()) wateringCan.display(); //if the watering can is inside it will be displayed in front of everything
-
   }
 
-  void update(){ //updates everything
+  void update() { //updates everything
     plant.update();
     particleSystem.update();
     wateringCan.update();
@@ -74,16 +73,16 @@ class Room {
     windows.releaseWindow();
     wateringCan.releaseWateringCan();
   }
-  
+
   void scroll(float scroll) {
     wateringCan.rotateWateringCan2(scroll);
   }
-  
-  void drawBackground(){ //draws the background (the wall);
+
+  void drawBackground() { //draws the background (the wall);
     pushMatrix();
     translate(position.x, position.y);
     rectMode(CENTER);
-    
+
     //wall
     strokeWeight(width/8);
     stroke(195, 166, 142);

@@ -81,7 +81,7 @@ class PlantSegment {
       position.y += sin(-(segmentBellow.getTotalAngle() + HALF_PI)) * segmentLength;
     }
 
-    if(hydrated) growAnimation();
+    if (hydrated) growAnimation();
   }
 
   void growAnimation() {

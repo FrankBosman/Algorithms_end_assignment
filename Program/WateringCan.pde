@@ -110,8 +110,8 @@ class WateringCan {
     float minRotation = 0;
     float maxRotation = radians(-60);
 
-    
-    if(!isSelected) {
+
+    if (!isSelected) {
       angle += rotationSpeed * 2;
       if (angle > minRotation) angle = minRotation;
     } 

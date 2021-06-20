@@ -30,15 +30,15 @@ class ParticleSystem {
     for (int i = particles.size() - 1; i >= 0; i--) { //update the particles
       Particle particle = particles.get(i);
       particle.update();
-      
+
       //test if the particle hit the flower pot
-      if(plant.isInFlowerPot(particle.getPos())){
+      if (plant.isInFlowerPot(particle.getPos())) {
         plant.hydrate();
         particle.kill();
       }
 
       //test if the particle hits the surface
-      if (glass.surface.hit(particle.getPos())){
+      if (glass.surface.hit(particle.getPos())) {
         if (glass.surface.addAreaForce(particle.getPos().x, particle.getPos().y, int(particle.radius*2), particle.getForceDown()/10)) particle.kill(); //check if it actually hit an segment of the surface and then removes itself.
       }
 

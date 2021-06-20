@@ -37,17 +37,17 @@ class Surface {
   void display() {
     pushMatrix();
     translate(pos.x, pos.y);   
-      beginShape();
-      noStroke();
-      fill(0, 64, 128, 150);
-      vertex(0, levelHeight);
-      for (WaterSegment segment : segments) {
-        segment.display();
-      }
-      vertex(waterSize.x, levelHeight);
-      vertex(waterSize.x, waterSize.y);
-      vertex(0, waterSize.y);
-      endShape();
+    beginShape();
+    noStroke();
+    fill(0, 64, 128, 150);
+    vertex(0, levelHeight);
+    for (WaterSegment segment : segments) {
+      segment.display();
+    }
+    vertex(waterSize.x, levelHeight);
+    vertex(waterSize.x, waterSize.y);
+    vertex(0, waterSize.y);
+    endShape();
     popMatrix();
   }
 
@@ -60,11 +60,11 @@ class Surface {
         hit = true;
       }
     }
-    if(hit) levelHeight -= 0.1; //increase the water level
+    if (hit) levelHeight -= 0.1; //increase the water level
     return hit;
   }
 
-  boolean hit(PVector posIn){
+  boolean hit(PVector posIn) {
     return posIn.y >= pos.y + levelHeight && posIn.x >= pos.x && posIn.x <= pos.x + waterSize.x;
   }
 }

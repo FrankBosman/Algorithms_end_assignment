@@ -8,7 +8,7 @@ class Windows {
 
   PVector position;
   PVector positionLeftWindow;
-  
+
   boolean isSelected;
 
   Windows(PVector positionLeftWindow, PVector position) {

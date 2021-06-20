@@ -45,17 +45,17 @@ class Glass {
     surface.display();
   }
 
-  void update(){
+  void update() {
     surface.update();
   }
 
-  void collide(Particle particle){
+  void collide(Particle particle) {
     //test if the particle hit the glass
     PVector posIn = particle.getPos();
-    if(posIn.y >= position.y - GLASS_HEIGHT/2 && posIn.y <= position.y + GLASS_HEIGHT/2 && //test the Y coords
-    ((posIn.x >= position.x - GLASS_WIDTH/2 - STROKE_WEIGHT*3 && posIn.x <= position.x - GLASS_WIDTH/2 + STROKE_WEIGHT*3) || //test the x coords of the left wall
-    (posIn.x >= position.x + GLASS_WIDTH/2 - STROKE_WEIGHT*3 && posIn.x <= position.x + GLASS_WIDTH/2 + STROKE_WEIGHT*3))){  //test the x coords of the right wall
-      particle.velocity.x *= -1;      
+    if (posIn.y >= position.y - GLASS_HEIGHT/2 && posIn.y <= position.y + GLASS_HEIGHT/2 && //test the Y coords
+      ((posIn.x >= position.x - GLASS_WIDTH/2 - STROKE_WEIGHT*3 && posIn.x <= position.x - GLASS_WIDTH/2 + STROKE_WEIGHT*3) || //test the x coords of the left wall
+      (posIn.x >= position.x + GLASS_WIDTH/2 - STROKE_WEIGHT*3 && posIn.x <= position.x + GLASS_WIDTH/2 + STROKE_WEIGHT*3))) {  //test the x coords of the right wall
+      particle.velocity.x *= -1;
     }
   }
 }

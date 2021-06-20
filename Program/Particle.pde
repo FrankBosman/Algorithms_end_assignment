@@ -10,7 +10,7 @@ class Particle {
   PVector position;
   PVector velocity;
   PVector acceleration;
-  
+
   float gravity;
 
   //interaction
@@ -41,7 +41,7 @@ class Particle {
   void update() {
     velocity.y += gravity;
 
-    if(position.y >= windowStillPos.y && abs(position.x - windowStillPos.x) <= windowStillWidth/2){
+    if (position.y >= windowStillPos.y && abs(position.x - windowStillPos.x) <= windowStillWidth/2) {
       velocity.y = 0;     //remove the velocty in the direction to the still
       velocity.x *= 0.9;  //add some drag from the still
       position.y = windowStillPos.y;
@@ -61,11 +61,11 @@ class Particle {
     }
   }
 
-  PVector getPos(){
+  PVector getPos() {
     return position.copy();
   }
 
-  void kill(){
+  void kill() {
     lifespan = 0;
   }
 
