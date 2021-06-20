@@ -34,3 +34,9 @@ void mouseDragged() {
 void mouseReleased() {
   room.released();
 }
+
+void mouseWheel(MouseEvent event) {
+  float e = event.getCount();
+  room.scroll(e);
+  println(e);
+}
