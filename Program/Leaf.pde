@@ -1,3 +1,8 @@
+
+/*  -- Leaf Class --
+ *  This Class displays the leaf and manages the growing animation 
+ */
+
 class Leaf extends PlantSegment {
   static final float ANIMATION_TIME = 500;
   float leafSize;

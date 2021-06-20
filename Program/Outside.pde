@@ -1,11 +1,15 @@
-class Outside {//this class handels all objects Outside the room and the interactions between them 
+
+/*  -- Outside Class --
+ *  This Class handels all objects outside and the interactions between them 
+ */
+
+class Outside {
 
   Flock flock;
   PImage landscape;
   PImage[] birdAnimation = new PImage[9];
 
   Outside() {
-
     //loads the images
     landscape = loadImage("landscape2.png");
     landscape.resize(width*7/8, 0);

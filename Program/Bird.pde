@@ -1,4 +1,8 @@
-// Bird class, this class is the bird, and is controlled by the flock
+
+/*  -- Bird Class --
+ *  This Class displays the bird and is controlled by the flock 
+ */
+
 class Bird{
 
     //movement and flocking

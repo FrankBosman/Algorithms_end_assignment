@@ -25,7 +25,6 @@ void draw() {
 
 void mousePressed() {
   room.clicked(mouseX, mouseY);
-  println(mouseX, mouseY);
 }
 
 void mouseDragged() {

@@ -1,3 +1,8 @@
+
+/*  -- Flock Class --
+ *  This Class displays the flower and manages the growing animation 
+ */
+
 class Flock{
   static final float AVOIDANCE_FACTOR  = 15;
   static final float SEPERATION_FACTOR = 0.5;
