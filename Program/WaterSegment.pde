@@ -1,3 +1,8 @@
+/*  -- WaterSegment Class --
+ *  This Class displays, the water at the points and interact with the other segments through surface. 
+ *  Adapted from topic 6 assignment 6.6, made by Ysbrand Burgstede, Frank Bosman.
+ */
+
 class WaterSegment {
   PVector pos;
   float heightOffset;
@@ -8,25 +13,24 @@ class WaterSegment {
   static final float frictionConst = 0.01;
   int mass = 1;
   float force;
+  Surface surface;
 
-  WaterSegment(PVector pos, float radius) {
+  WaterSegment(PVector pos, float radius, Surface surface) {
     this.pos = pos;
     this.radius = radius;
-    heightOffset = 0;
+    this.surface = surface;
+    heightOffset = 0; //the offset from the default water level
   }
 
   void display() { //draws the segment
-    // fill(0,0,200);
-    // noStroke();
-    // circle(pos.x, pos.y + heightOffset, radius);
-    curveVertex(pos.x, pos.y + heightOffset);
+    curveVertex(pos.x, pos.y + heightOffset + surface.levelHeight);
   }
 
   void updateForces(float forceLeft, float forceRight) { //only update the forces
     float springForce = -heightOffset * springConst;
     float friction =  -frictionConst * speed;  
 
-    force = springForce + friction + forceLeft + forceRight;
+    force = springForce + friction + forceLeft + forceRight; //the neto force on the segment
 
     acceleration = force/mass;
   }
@@ -42,12 +46,12 @@ class WaterSegment {
     speed += acceleration;
   }
 
-  float distance(float x, float y) { //calcs the distance between 
-    return dist(x, y, pos.x, pos.y + heightOffset);
+  float distance(float x, float y, PVector posWater) { //calcs the distance between 
+    return dist(x, y, pos.x+ posWater.x, pos.y + posWater.y + heightOffset + surface.levelHeight);
   }
 
   PVector getPos() {
-    return new PVector(pos.x, pos.y + heightOffset);
+    return new PVector(pos.x, pos.y + heightOffset + surface.levelHeight);
   }
 
   PVector distVect(PVector otherPos) {
