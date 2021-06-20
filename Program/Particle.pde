@@ -1,3 +1,9 @@
+
+/*  -- Particle Class --
+ *  This Class handels the particle
+ *  Adapted from Topic 4 Assignment 1 made by Marnix Lueb and Sterre Kuijper 
+ */
+
 class Particle {
   int lifespan;
 

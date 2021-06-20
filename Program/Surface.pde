@@ -39,7 +39,7 @@ class Surface {
     translate(pos.x, pos.y);   
       beginShape();
       noStroke();
-      fill(0, 64, 128);
+      fill(0, 64, 128, 150);
       vertex(0, levelHeight);
       for (WaterSegment segment : segments) {
         segment.display();

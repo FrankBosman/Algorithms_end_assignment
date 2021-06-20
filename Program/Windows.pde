@@ -22,8 +22,6 @@ class Windows {
     pushMatrix();
     translate(position.x, position.y);
 
-
-
     //window left
     pushMatrix();
     translate(positionLeftWindow.x, positionLeftWindow.y);    
@@ -39,7 +37,6 @@ class Windows {
     vertex(positionLeftWindow.x + 10 - width/8, 100 - (1 - (positionLeftWindow.x + 20)/(-width/4 - 20))*250);
     vertex(-width/8 - 10, -150);
     vertex(-width/8 - 10, -200);
-    println(positionLeftWindow.x);
     endShape();    
     //stroke 2
     beginShape();
@@ -67,8 +64,6 @@ class Windows {
     stroke(63);
     line(-width/8, -50, -width/8, 50);
     popMatrix();
-
-
 
     //window center
     pushMatrix();
@@ -104,8 +99,6 @@ class Windows {
     endShape();
     popMatrix();
 
-
-
     //window right
     pushMatrix();
     translate(width/4 + 20, 0);
@@ -140,8 +133,6 @@ class Windows {
     vertex(width/8 - 10, -100);
     endShape();
     popMatrix();
-
-
 
     popMatrix();
   }

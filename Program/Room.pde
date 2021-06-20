@@ -13,6 +13,7 @@ class Room {
 
   PVector position;
   PImage[] flowerImages = new PImage[5];
+  PImage tulipImage;
 
   float windowSillHeight;
   PImage wateringCanImage;
@@ -25,11 +26,13 @@ class Room {
       flowerImages[i] = loadImage("flower" + i + ".png");
       flowerImages[i].resize(100, 0);
     }
+    tulipImage = loadImage("tulip.png");
+    tulipImage.resize(0, 300);
 
     windows = new Windows(new PVector(-width/4 - 20, 0),  position);
     plant = new Plant(width/2, height*3/4 + 60, 1, flowerImages, windows);
     
-    glass = new Glass(new PVector(width*5/8, windowSillHeight));
+    glass = new Glass(new PVector(width*7/8, windowSillHeight), tulipImage);
     particleSystem = new ParticleSystem(new PVector(position.x, windowSillHeight), width*3/4 + 150, plant, glass);
 
     wateringCanImage = loadImage("wateringCan.png");
@@ -54,6 +57,7 @@ class Room {
     plant.update();
     particleSystem.update();
     wateringCan.update();
+    glass.update();
   }
 
   void clicked(float x, float y) { //manages if the user clicked

@@ -1,6 +1,7 @@
 
 /*  -- Flock Class --
  *  This Class displays the flower and manages the growing animation 
+ *  Adopted from Topic 5 assignment 2 made by Marnix Lueb and Frank Bosman
  */
 
 class Flock{

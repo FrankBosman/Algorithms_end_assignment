@@ -12,14 +12,26 @@ class Glass {
   PVector position;
   Surface surface;
 
-  Glass(PVector position) {
-    this.position = position.sub(0, GLASS_HEIGHT/2); //move the pos coordinate so the glass sits on the given coordinate
+  PImage tulipImage;
+
+  Glass(PVector position, PImage tulipImage) {
+    this.position = position.add(0, -GLASS_HEIGHT/2 - STROKE_WEIGHT/2); //move the pos coordinate so the glass sits on the given coordinate
+    this.tulipImage = tulipImage;
     surface = new Surface(PVector.add(position, new PVector(-GLASS_WIDTH/2 + STROKE_WEIGHT/2, -STROKE_WEIGHT)), GLASS_WIDTH - STROKE_WEIGHT, GLASS_HEIGHT/2, 2); //creates the surface that handles the water
   }
 
   void display() {
     pushMatrix();
     translate(position.x, position.y);
+
+    //tulip
+    pushMatrix();
+    rotate(PI/12);  
+    image(tulipImage, 0, -tulipImage.height/3);
+    rotate(-PI/8);  
+    image(tulipImage, 0, -tulipImage.height/3);
+
+    popMatrix();
 
     strokeWeight(STROKE_WEIGHT);
     stroke(174, 232, 240);    //light blue
@@ -30,8 +42,11 @@ class Glass {
     //reset strokeWeight
     strokeWeight(1);
 
-    surface.update();
     surface.display();
+  }
+
+  void update(){
+    surface.update();
   }
 
   void collide(Particle particle){

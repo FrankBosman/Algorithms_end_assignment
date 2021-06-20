@@ -1,3 +1,9 @@
+
+/*  -- ParticleSystem Class --
+ *  This Class handels the particle system
+ *  Adapted from Topic 4 Assignment 1 made by Marnix Lueb and Sterre Kuijper 
+ */
+
 class ParticleSystem {
   ArrayList<Particle> particles;
   PVector windowStillPos;

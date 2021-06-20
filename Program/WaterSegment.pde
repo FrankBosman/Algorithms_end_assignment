@@ -54,16 +54,16 @@ class WaterSegment {
     return new PVector(pos.x, pos.y + heightOffset + surface.levelHeight);
   }
 
-  PVector distVect(PVector otherPos) {
+  PVector distVect(PVector otherPos) { //the distance vector from this segment to the other
     PVector distVect = getPos().sub(otherPos);
     return distVect;
   }
 
-  float getHeightOffset() {
+  float getHeightOffset() { //return the offset from the default water levels, used in calculating the spring force
     return heightOffset;
   }
 
-  float getSpringForce(float fromHeight) {
+  float getSpringForce(float fromHeight) { //caluclates the spring force
     return (heightOffset - fromHeight) * springConst;
   }
 }

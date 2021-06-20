@@ -84,7 +84,7 @@ class WateringCan {
 
     if (isOnWindowSill() || isSelected) velocity.y = 0; //sets velocity to 0
 
-    //rotateWateringCan();
+    rotateWateringCan();
 
     position.add(velocity);
   }
@@ -110,10 +110,8 @@ class WateringCan {
     float minRotation = 0;
     float maxRotation = radians(-60);
 
-    if (nearPlant() && isSelected) {
-      angle -= rotationSpeed;
-      if (angle < maxRotation) angle = maxRotation;
-    } else if (!isSelected) {
+    
+    if(!isSelected) {
       angle += rotationSpeed * 2;
       if (angle > minRotation) angle = minRotation;
     } 

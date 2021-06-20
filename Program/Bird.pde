@@ -1,6 +1,7 @@
 
 /*  -- Bird Class --
  *  This Class displays the bird and is controlled by the flock 
+*  Adopted from Topic 5 assignment 2 made by Marnix Lueb and Frank Bosman
  */
 
 class Bird{
