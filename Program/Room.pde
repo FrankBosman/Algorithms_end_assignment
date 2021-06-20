@@ -1,6 +1,8 @@
+
 /*  -- Room Class --
  *  this class handels all objects inside the room and the interactions between them 
  */
+ 
 class Room {
 
   Plant plant;
@@ -36,41 +38,40 @@ class Room {
     wateringCan = new WateringCan(new PVector(width*3/4 + wateringCanImage.height/2, windowSillHeight - wateringCanImage.height/2 - 60), particleSystem, wateringCanImage, windows);
   }
 
-  void display() {
-    
+  void display() { //displays everything that is inside the room
 
-    if (wateringCan.isOutside()) wateringCan.display();
+    if (wateringCan.isOutside()) wateringCan.display(); //if the watering can is outside it will be displayed behind the background
     drawBackground();
     windows.display();
     plant.display();
     particleSystem.display();
     glass.display();
-    if (!wateringCan.isOutside()) wateringCan.display();
+    if (!wateringCan.isOutside()) wateringCan.display(); //if the watering can is inside it will be displayed in front of everything
 
   }
 
-  void update(){
+  void update(){ //updates everything
     plant.update();
     particleSystem.update();
     wateringCan.update();
   }
 
-  void clicked(float x, float y) {
+  void clicked(float x, float y) { //manages if the user clicked
     windows.selectWindow(x, y);
     wateringCan.selectWateringCan(x, y);
   }
 
-  void dragged(float x, float px, float y, float py) {
+  void dragged(float x, float px, float y, float py) { //manages if the user dragged
     windows.moveWindow(x - px);
     wateringCan.moveWateringCan(x - px, y - py);
   }
 
-  void released() {
+  void released() { //manages if the user released
     windows.releaseWindow();
     wateringCan.releaseWateringCan();
   }
   
-  void drawBackground(){
+  void drawBackground(){ //draws the background (the wall);
     pushMatrix();
     translate(position.x, position.y);
     rectMode(CENTER);

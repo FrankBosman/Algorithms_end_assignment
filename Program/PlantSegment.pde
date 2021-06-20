@@ -1,4 +1,9 @@
-//Flower Segment Class
+
+/*  -- PlantSegment Class --
+ *  This Class manages the plantSegment and everything surounding it.
+ *  It updates the linked list with the mass spring damperer system.
+ *  Handles the interaction and draws everything.
+ */
 
 class PlantSegment {
   static final float DAMPING_CONSTANT = 0.02;

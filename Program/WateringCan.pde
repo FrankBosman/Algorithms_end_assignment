@@ -1,6 +1,11 @@
+
+/*  -- WateringCan Class --
+ *  This Class displays and manages the watering can.
+ *  It handles the interaction with the user.
+ */
+
 class WateringCan {
   static final float NOZZLE_WIDTH = 54.45;
-  
 
   //movement
   PVector velocity;
@@ -50,9 +55,8 @@ class WateringCan {
     nozzleDirection = PVector.fromAngle(radians(165)).setMag(20);
     nozzlePosition = new PVector(-60 + nozzleDirection.x, 160 + nozzleDirection.y);
   }
-
-  //draws the watering can
-  void display() {
+  
+  void display() { //draws the watering can
     //adds particles to the watering can
     if (isWatering) {
       waterParticleSystem.addParticle(PVector.add(nozzlePosition, position), nozzleDirection.copy(), NOZZLE_WIDTH);
@@ -66,9 +70,8 @@ class WateringCan {
     image(wateringCanImage, positionOffSetX, positionOffSetY);
     popMatrix();   
   }
-
-  //updates the watering can
-  void update() {
+  
+  void update() { //updates the watering can
     if ((!isSelected && !isOnWindowSill())) { //if the watering can is not selected and also not on the window sill gravity will be added
       velocity.y += gravity;
       if (position.y > height + wateringCanImage.height) {//once the watering can is outside the screen make it fall back in
@@ -86,38 +89,25 @@ class WateringCan {
     position.add(velocity);
 
   }
-
-  //selects the watering can
-  void selectWateringCan(float x, float y) {
+  
+  void selectWateringCan(float x, float y) { //selects the watering can
     if (isOverWateringCan(x, y)) isSelected = true;
   }
-
-  //moves the watering can
-  void moveWateringCan(float deltaX, float deltaY) {
+  
+  void moveWateringCan(float deltaX, float deltaY) { //moves the watering can
     if (isSelected) {
       PVector deltaPosition = new PVector(deltaX, deltaY);
       position.add(deltaPosition);
-
-      //position = new PVector(x, y);
-
-      // position.x += x - px;
-      // if (y > height*7/8 + 30 - 80 &&
-      //   x > width/8 - 85 - wateringCanImage.width/2 + 37 &&
-      //   x < width*7/8 + 85 + wateringCanImage.width/2 - 92) {
-      //   position.y += y - py;
-      // }
 
       isOutside = isInsideWindow();
     }
   }
 
-  //releases the watering can
-  void releaseWateringCan() {
+  void releaseWateringCan() { //releases the watering can
     isSelected = false;
   }
 
-  //rotates the watering can if it is near the plant
-  void rotateWateringCan() {
+  void rotateWateringCan() { //rotates the watering can if it is near the plant
     float minRotation = 0;
     float maxRotation = radians(-60);
 
@@ -131,18 +121,9 @@ class WateringCan {
 
     if (angle == maxRotation) isWatering = true;
     else isWatering = false;
-
-    //if (abovePlant() && isSelected) {
-    //  if (angle > maxRotation) angle -= rotationSpeed;
-    //  else isWatering = true;
-    //} else if ((!abovePlant() || !isSelected) && angle < minRotation) {
-    //  angle += rotationSpeed * 2;
-    //  isWatering = false;
-    //}
   }
 
-  //checks if the watering can is standing on the window sill
-  boolean isOnWindowSill() {
+  boolean isOnWindowSill() {//checks if the watering can is standing on the window sill
     //if the window is open and the watering can is placed inside the left window
     //the watering can will be plased outside so it is not on the window sill
 
@@ -154,31 +135,28 @@ class WateringCan {
     }
   }
 
-  //checks if the mouse is on the watering can
-  boolean isOverWateringCan(float x, float y) {
+  boolean isOverWateringCan(float x, float y) { //checks if the mouse is on the watering can
     return (x > position.x - wateringCanImage.width/2 + positionOffSetX && 
       x < position.x + wateringCanImage.width/2 + positionOffSetX && 
       y > position.y - wateringCanImage.height/2 + positionOffSetY && 
       y < position.y + wateringCanImage.height/2 + positionOffSetY);
   }
 
-  //checks if the watering can is near the plant
-  boolean nearPlant() {
+  boolean nearPlant() { //checks if the watering can is near the plant
     return position.x > width*3/8 + wateringCanImage.width/2 &&
       position.x < width*5/8 + wateringCanImage.width/4 &&
       position.y > height/8 &&
       position.y < height*5/8;
   }
 
-  //checks if the watering can is inside the left window
-  boolean isInsideWindow() {
+  boolean isInsideWindow() { //checks if the watering can is inside the left window
     return position.x - wateringCanImage.width/2 + positionOffSetX > width/8 - 10 &&
       position.x + wateringCanImage.width/2 + positionOffSetX < windows.getPosWindowLeft() &&
       position.y + wateringCanImage.height/2 + positionOffSetY <  800 &&
       position.y - wateringCanImage.height/2 + positionOffSetY > 120;
   }
 
-  boolean isOutside(){
+  boolean isOutside(){ //checks if the watering can is outside (the window)
     return isOutside;
   }
 }

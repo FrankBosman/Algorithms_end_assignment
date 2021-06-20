@@ -1,3 +1,8 @@
+
+/*  -- Glass Class --
+ *  This Class displays the glass.
+ */
+
 class Glass {
   static final int GLASS_HEIGHT = 200;
   static final int GLASS_WIDTH = 75;
