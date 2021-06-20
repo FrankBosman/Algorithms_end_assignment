@@ -30,7 +30,7 @@ class ParticleSystem {
       }
 
       //test if the particle hits the surface
-      if (particle.getPos().y >= glass.surface.getPos()) 
+      // if (particle.getPos().y >= glass.surface.getPos()) 
 
       if (particle.isDead()) {
         particles.remove(i);

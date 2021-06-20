@@ -58,6 +58,6 @@ class Surface {
   }
 
   boolean hit(PVector posIn){
-    if(posIn.y >= pos.y + levelHeight )
+    // if(posIn.y >= pos.y + levelHeight &&)
   }
 }
