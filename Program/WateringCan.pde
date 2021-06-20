@@ -55,28 +55,28 @@ class WateringCan {
     nozzleDirection = PVector.fromAngle(radians(165)).setMag(20);
     nozzlePosition = new PVector(-60 + nozzleDirection.x, 160 + nozzleDirection.y);
   }
-  
+
   void display() { //draws the watering can
     //adds particles to the watering can
     if (isWatering) {
       waterParticleSystem.addParticle(PVector.add(nozzlePosition, position), nozzleDirection.copy(), NOZZLE_WIDTH);
     }
-    
+
     //watering can
     pushMatrix();
     translate(position.x, position.y);
-    if(isOutside) scale(0.9);
+    if (isOutside) scale(0.9);
     rotate(angle);   
     image(wateringCanImage, positionOffSetX, positionOffSetY);
-    popMatrix();   
+    popMatrix();
   }
-  
+
   void update() { //updates the watering can
     if ((!isSelected && !isOnWindowSill())) { //if the watering can is not selected and also not on the window sill gravity will be added
       velocity.y += gravity;
       if (position.y > height + wateringCanImage.height) {//once the watering can is outside the screen make it fall back in
         isOutside = false;
-        position = new PVector(startPosition.x, -wateringCanImage.height); 
+        position = new PVector(startPosition.x, -wateringCanImage.height);
       }
     }
 
@@ -84,16 +84,15 @@ class WateringCan {
 
     if (isOnWindowSill() || isSelected) velocity.y = 0; //sets velocity to 0
 
-    rotateWateringCan();
+    //rotateWateringCan();
 
     position.add(velocity);
-
   }
-  
+
   void selectWateringCan(float x, float y) { //selects the watering can
     if (isOverWateringCan(x, y)) isSelected = true;
   }
-  
+
   void moveWateringCan(float deltaX, float deltaY) { //moves the watering can
     if (isSelected) {
       PVector deltaPosition = new PVector(deltaX, deltaY);
@@ -123,11 +122,28 @@ class WateringCan {
     else isWatering = false;
   }
 
+  void rotateWateringCan2(float scroll) {
+    float minRotation = 0;
+    float maxRotation = radians(-60);
+    angle -= scroll * 0.1;
+
+    if (!isSelected) {
+      angle += rotationSpeed * 2;
+      if (angle > minRotation) angle = minRotation;
+    } 
+
+    if (angle < maxRotation) angle = maxRotation;
+    if (angle > minRotation) angle = minRotation;
+
+    if (angle == maxRotation) isWatering = true;
+    else isWatering = false;
+  }
+
   boolean isOnWindowSill() {//checks if the watering can is standing on the window sill
     //if the window is open and the watering can is placed inside the left window
     //the watering can will be plased outside so it is not on the window sill
 
-    if(isOutside) return false;
+    if (isOutside) return false;
     else {
       return  position.x - 9 > width/8 - 85 &&
         position.x - 119 < width*7/8 + 85 &&
@@ -156,7 +172,7 @@ class WateringCan {
       position.y - wateringCanImage.height/2 + positionOffSetY > 120;
   }
 
-  boolean isOutside(){ //checks if the watering can is outside (the window)
+  boolean isOutside() { //checks if the watering can is outside (the window)
     return isOutside;
   }
 }
