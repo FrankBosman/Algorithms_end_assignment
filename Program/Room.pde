@@ -26,10 +26,9 @@ class Room {
 
     windows = new Windows(new PVector(-width/4 - 20, 0),  position);
     plant = new Plant(width/2, height*3/4 + 60, 1, flowerImages, windows);
-    particleSystem = new ParticleSystem(new PVector(position.x, windowSillHeight), width*3/4 + 150, plant);
-    glass = new Glass(new PVector(width*5/8, windowSillHeight - 52.5));
-
-
+    
+    glass = new Glass(new PVector(width*5/8, windowSillHeight));
+    particleSystem = new ParticleSystem(new PVector(position.x, windowSillHeight), width*3/4 + 150, plant, glass);
 
     wateringCanImage = loadImage("wateringCan.png");
     wateringCanImage.resize(0, 160);

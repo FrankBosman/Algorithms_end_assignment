@@ -4,7 +4,7 @@ class ParticleSystem {
   float windowStillWidth;
   Plant plant;
 
-  ParticleSystem(PVector windowStillPos, float windowStillWidth, Plant plant) {
+  ParticleSystem(PVector windowStillPos, float windowStillWidth, Plant plant, Glass glass) {
     particles = new ArrayList<Particle>();
 
     this.windowStillPos = windowStillPos;
@@ -27,7 +27,10 @@ class ParticleSystem {
       if(plant.isInFlowerPot(particle.getPos())){
         plant.hydrate();
         particle.kill();
-      } 
+      }
+
+      //test if the particle hits the surface
+      if (particle.getPos().y >= glass.surface.getPos()) 
 
       if (particle.isDead()) {
         particles.remove(i);
