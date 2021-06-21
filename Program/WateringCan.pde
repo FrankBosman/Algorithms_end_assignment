@@ -119,6 +119,9 @@ class WateringCan {
 
     if (angle == MAX_ROTATION) isWatering = true;
     else isWatering = false;
+
+    if (angle < MAX_ROTATION) angle = MAX_ROTATION;
+    if (angle > MIN_ROTATION) angle = MIN_ROTATION;
   }
 
   void rotateWateringCanScroll(float scroll) {

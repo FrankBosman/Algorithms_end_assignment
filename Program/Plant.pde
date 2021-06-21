@@ -123,7 +123,7 @@ class Plant {
         }
       }
 
-      //growns the plant on all the growing places
+      //grows the plant on all the growing places
       for (int i = 0; i < growLocations.size() - (createdBranch ? 1 : 0); i++) { //if a branch was created then don't loop until the end.
         int index = growLocations.get(i);
         segments.add(new PlantSegment(SEGMENT_SIZE, segments.get(index), 0, GROW_INTERVAL));

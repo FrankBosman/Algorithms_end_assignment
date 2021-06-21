@@ -17,22 +17,21 @@ Room room;
 boolean keyDown;
 
 void setup() {
-  //fullScreen();
   size(1800, 900, P2D);
   rectMode(CENTER);
   imageMode(CENTER);
+  
   room = new Room(new PVector(width/2, height/2));
-
   outside = new Outside();
 }
 
 void draw() {
   background(100);
-  outside.display();
   outside.update();
-
-  room.display();
+  outside.display();
+  
   room.update();
+  room.display();
 
   //test if keydown
   if(keyDown){
