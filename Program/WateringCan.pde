@@ -136,7 +136,8 @@ class WateringCan {
     else {
       return  position.x - 9 > width/8 - 85 &&
         position.x - 119 < width*7/8 + 85 &&
-        position.y >= startPosition.y;
+        position.y >= startPosition.y &&
+        position.y < startPosition.y + 10;
     }
   }
 
@@ -148,10 +149,10 @@ class WateringCan {
   }
 
   boolean isInsideWindow() { //checks if the watering can is inside the left window
-    return position.x - wateringCanImage.width/2 + positionOffSetX > width/8 - 10 &&
-      position.x + wateringCanImage.width/2 + positionOffSetX < windows.getPosWindowLeft() &&
-      position.y + wateringCanImage.height/2 + positionOffSetY <  800 &&
-      position.y - wateringCanImage.height/2 + positionOffSetY > 120;
+    return position.x - wateringCanImage.width/2 + positionOffSetX > width/8 - 30 &&
+      position.x + wateringCanImage.width/2 + positionOffSetX < windows.getPosWindowLeft() - 10 &&
+      position.y + wateringCanImage.height/2 + positionOffSetY <  height*7/8 + 10 &&
+      position.y - wateringCanImage.height/2 + positionOffSetY > height/8 - 10;
   }
 
   boolean isOutside() { //checks if the watering can is outside (the window)
