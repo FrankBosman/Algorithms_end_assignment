@@ -5,7 +5,7 @@
  *  
  *  A room where you can water a plant pot to make it sproud a plant.
  *  Interactions:
- *    -Move watercan, rotate it by scrolling
+ *    -Move watercan, rotate it by scrolling or by pressing space.
  *    -open window, to let wind in
  *    -water plant
  *    -water vase

@@ -8,16 +8,12 @@ class WaterSystem {
   ArrayList<Particle> particles;
   PVector windowSillPos;
   float windowSillWidth;
-  Plant plant;
-  Glass glass;
 
-  WaterSystem(PVector windowSillPos, float windowSillWidth, Plant plant, Glass glass) {
+  WaterSystem(PVector windowSillPos, float windowSillWidth) {
     particles = new ArrayList<Particle>();
 
     this.windowSillPos = windowSillPos;
     this.windowSillWidth = windowSillWidth;
-    this.plant = plant;
-    this.glass = glass;
   }
 
   void display() {
@@ -26,15 +22,17 @@ class WaterSystem {
     }
   }
 
-  void update() {
+  void update(Plant[] plants, Glass glass) {
     for (int i = particles.size() - 1; i >= 0; i--) { //update the particles
       Particle particle = particles.get(i);
       particle.update();
 
-      //test if the particle hit the flower pot
-      if (plant.isInFlowerPot(particle.getPos())) {
-        plant.hydrate();
-        particle.kill();
+      //test if the particle hit a flower pot, and hydrate that plant
+      for(Plant plant : plants){
+        if (plant.isInFlowerPot(particle.getPos())) {
+          plant.hydrate();
+          particle.kill();
+        }
       }
 
       //test if the particle hits the surface

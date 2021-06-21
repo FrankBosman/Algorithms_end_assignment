@@ -41,7 +41,7 @@ class WateringCan {
 
     //movement
     windowSillHeight = height*7/8 + 30;
-    startPosition = new PVector(width*3/4 + wateringCanImage.height/2, windowSillHeight - wateringCanImage.height/2 - 60);
+    startPosition = position.copy();
     velocity = new PVector(0, 0);
     gravity = 0.1;
     isSelected = false;

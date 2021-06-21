@@ -9,7 +9,6 @@ class Plant {
   //constants
   static final int UPPER_BRANCH_SIZE = 5;
   static final int LOWER_BRANCH_SIZE = 2;
-  static final int MAIN_BRANCH_SIZE = 30;
   static final int GROW_INTERVAL = 30;    //in frames
   static final int BRANCH_INTERVAL = 2;   //in segments
   static final int SEGMENT_SIZE = 10;
@@ -22,6 +21,8 @@ class Plant {
   IntList branchesLengths = new IntList(); //stores the length of the growing branches.
   ArrayList<PlantSegment> segments = new ArrayList<PlantSegment>(); //stores the segments as a linked list, Plant segments can be normal/basic segments leafs or the flower.
   String previousDirection;
+  int mainBranchSize;
+
 
   //growing
   int growTimer;
@@ -36,6 +37,14 @@ class Plant {
   PVector position;
   float flowerPotWidth;
   PImage[] flowerImages;
+
+  //colors
+  // HashMap<String,color> colors = new HashMap<String,color>();
+  color[] colorsBrown = {color(155, 83, 0), color(144, 76, 1), color(180, 105, 22), color(164, 97, 19)};
+  color[] colorsBlue = {color(106, 196, 184), color(79, 160, 143), color(114, 211, 192), color(106, 200, 182)};
+  color[] colorsYellow = {color(246,197,0), color(234,175,13), color(255,226,65), color(255,206,12)};
+  color[] colorsRed = {color(208,78,88), color(187,67,77), color(223,102,117), color(218,92,96)};
+  color[] currentColorPallet = new color[4];
 
   Plant(float x, float y, int startAmount, PImage[] flowerImages, Windows windows) {
 
@@ -61,8 +70,17 @@ class Plant {
     isGrowning = true;
     branchChance = 2; //50%
     intervalSinceBranch = 0;
-    previousDirection = "Right";
+    previousDirection = (int(random(0,2)) == 0) ? "Right" : "Left";
     hydratedTimer = 0;   
+    mainBranchSize = 30 + int(random(-10, 10));
+
+    //colors
+    switch (int(random(0,4))) {
+      case 0: currentColorPallet = colorsBrown; break;
+      case 1: currentColorPallet = colorsBlue; break;
+      case 2: currentColorPallet = colorsYellow; break;
+      case 3: currentColorPallet = colorsRed; break;      
+    }
 
     flowerPotWidth = width/24;
   }
@@ -108,7 +126,7 @@ class Plant {
 
       boolean createdBranch = false; //check if a branch was created, if that's the case then don't also grow it
 
-      if (branchesLengths.get(0) < float(MAIN_BRANCH_SIZE) * 0.8 && intervalSinceBranch >= BRANCH_INTERVAL) { //don't spawn a branch at the top
+      if (branchesLengths.get(0) < float(mainBranchSize) * 0.8 && intervalSinceBranch >= BRANCH_INTERVAL) { //don't spawn a branch at the top
         if (int(random(0, branchChance)) == 0) { //small chance to create a new branch
           int index = growLocations.get(0);
           if (previousDirection.equals("Right")) previousDirection = "Left";
@@ -132,7 +150,7 @@ class Plant {
         branchesLengths.add(i, 1);
 
         //decide if the branch should end.
-        if (i == 0 && branchesLengths.get(i) > MAIN_BRANCH_SIZE) {
+        if (i == 0 && branchesLengths.get(i) > mainBranchSize) {
           //add a flower.
           PImage flowerImage = flowerImages[int(random(flowerImages.length))];
 
@@ -168,7 +186,12 @@ class Plant {
 
     //flower pot
     noStroke();
-    fill(155, 83, 0);
+    //Bottom Left
+    // fill(155, 83, 0); //brown
+    // fill(106, 196, 184); //blue
+    // fill(246,197,0);  //yellow
+    // fill(208,78,88);
+    fill(currentColorPallet[0]);
     beginShape();
     vertex(-width/45, height/8 - 30);
     vertex(-width/30, 0);
@@ -176,7 +199,12 @@ class Plant {
     vertex(0, height/8 - 30);
     endShape();
 
-    fill(144, 76, 1);
+    //Bottom Right 
+    // fill(144, 76, 1);
+    // fill(79, 160, 143);
+    // fill(234,175,13);
+    // fill(187,67,77);
+    fill(currentColorPallet[1]);
     beginShape();
     vertex(0, height/8 - 30);
     vertex(0, 0);
@@ -185,10 +213,20 @@ class Plant {
     endShape();
 
     rectMode(CORNER);
-    fill(180, 105, 22);
+    //Top Left
+    // fill(180, 105, 22);
+    // fill(114, 211, 192);
+    // fill(255,226,65);
+    // fill(223,102,117);
+    fill(currentColorPallet[2]);
     rect(-flowerPotWidth, -height/30, flowerPotWidth, height/30, 4, 0, 0, 4);
 
-    fill(164, 97, 19);
+    //Top Right
+    // fill(164, 97, 19);
+    // fill(106, 200, 182);
+    // fill(255,206,12);
+    // fill(218,92,96);
+    fill(currentColorPallet[3]);
     rect(0, -height/30, flowerPotWidth, height/30, 0, 4, 4, 0);
     rectMode(CENTER);
   }

@@ -5,7 +5,7 @@
 
 class Room {
 
-  Plant plant;
+  Plant plants[] = new Plant[3];
   WaterSystem waterSystem;
   WateringCan wateringCan;
   Glass glass;
@@ -30,15 +30,17 @@ class Room {
     tulipImage.resize(0, 300);
 
     windows = new Windows(new PVector(-width/4 - 20, 0), position);
-    plant = new Plant(width/2, height*3/4 + 60, 1, flowerImages, windows);
+    plants[0] = new Plant(width/2, height*3/4 + 60, 1, flowerImages, windows);
+    plants[1] = new Plant(width/3, height*3/4 + 60, 1, flowerImages, windows);
+    plants[2] = new Plant(width/3*2, height*3/4 + 60, 1, flowerImages, windows);
 
-    glass = new Glass(new PVector(width*7/8, windowSillHeight), tulipImage);
-    waterSystem = new WaterSystem(new PVector(position.x, windowSillHeight), width*3/4 + 150, plant, glass);
+    glass = new Glass(new PVector(width*2/14, windowSillHeight), tulipImage);
+    waterSystem = new WaterSystem(new PVector(position.x, windowSillHeight), width*3/4 + 150);
 
     wateringCanImage = loadImage("wateringCan.png");
     wateringCanImage.resize(0, 160);
 
-    wateringCan = new WateringCan(new PVector(width*3/4 + wateringCanImage.height/2, windowSillHeight - wateringCanImage.height/2 - 60), waterSystem, wateringCanImage, windows);
+    wateringCan = new WateringCan(new PVector(width*7/8 + wateringCanImage.height/2, windowSillHeight - wateringCanImage.height/2 - 60), waterSystem, wateringCanImage, windows);
   }
 
   void display() { //displays everything that is inside the room
@@ -46,15 +48,20 @@ class Room {
     if (wateringCan.isOutside()) wateringCan.display(); //if the watering can is outside it will be displayed behind the background
     drawBackground();
     windows.display();
-    plant.display();
+
+    for(Plant plant : plants){
+      plant.display();
+    }
     waterSystem.display();
     glass.display();
     if (!wateringCan.isOutside()) wateringCan.display(); //if the watering can is inside it will be displayed in front of everything
   }
 
   void update() { //updates everything
-    plant.update();
-    waterSystem.update();
+    for(Plant plant : plants){
+      plant.update();
+    }
+    waterSystem.update(plants, glass);
     wateringCan.update();
     glass.update();
   }
