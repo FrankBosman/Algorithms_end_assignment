@@ -14,6 +14,7 @@
 
 Outside outside;
 Room room;
+boolean keyDown;
 
 void setup() {
   //fullScreen();
@@ -32,6 +33,13 @@ void draw() {
 
   room.display();
   room.update();
+
+  //test if keydown
+  if(keyDown){
+    if(key == ' '){
+      room.scroll(0.5);
+    }
+  }
 
   fill(0);
   text(frameRate, 5, 20);
@@ -52,4 +60,12 @@ void mouseReleased() {
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
   room.scroll(e);
+}
+
+void keyPressed(){
+  keyDown = true;
+}
+
+void keyReleased() {
+  keyDown = false;
 }

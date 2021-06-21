@@ -58,4 +58,8 @@ class Glass {
       particle.velocity.x *= -1;
     }
   }
+
+  boolean addForceToSurface(float x, float y, int dist, float multiplier){
+    return surface.addAreaForce(x, y, dist, multiplier);
+  }
 }

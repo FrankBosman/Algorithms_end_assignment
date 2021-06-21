@@ -1,17 +1,17 @@
 
-/*  -- ParticleSystem Class --
+/*  -- WaterSystem Class --
  *  This Class handels the particle system
  *  Adapted from Topic 4 Assignment 1 made by Marnix Lueb and Sterre Kuijper 
  */
 
-class ParticleSystem {
+class WaterSystem {
   ArrayList<Particle> particles;
   PVector windowSillPos;
   float windowSillWidth;
   Plant plant;
   Glass glass;
 
-  ParticleSystem(PVector windowSillPos, float windowSillWidth, Plant plant, Glass glass) {
+  WaterSystem(PVector windowSillPos, float windowSillWidth, Plant plant, Glass glass) {
     particles = new ArrayList<Particle>();
 
     this.windowSillPos = windowSillPos;

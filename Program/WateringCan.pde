@@ -25,7 +25,7 @@ class WateringCan {
   float angle;
   float rotationSpeed;
   boolean isWatering;
-  ParticleSystem waterParticleSystem;
+  WaterSystem waterParticleSystem;
 
   float windowSillHeight;
   float positionOffSetX;
@@ -33,7 +33,7 @@ class WateringCan {
   PVector nozzlePosition;
   PVector nozzleDirection;
 
-  WateringCan(PVector position, ParticleSystem waterParticleSystem, PImage wateringCanImage, Windows windows) {
+  WateringCan(PVector position, WaterSystem waterParticleSystem, PImage wateringCanImage, Windows windows) {
     this.position = position;
     this.waterParticleSystem = waterParticleSystem;
     this.wateringCanImage = wateringCanImage;

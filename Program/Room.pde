@@ -6,7 +6,7 @@
 class Room {
 
   Plant plant;
-  ParticleSystem particleSystem;
+  WaterSystem waterSystem;
   WateringCan wateringCan;
   Glass glass;
   Windows windows;
@@ -33,12 +33,12 @@ class Room {
     plant = new Plant(width/2, height*3/4 + 60, 1, flowerImages, windows);
 
     glass = new Glass(new PVector(width*7/8, windowSillHeight), tulipImage);
-    particleSystem = new ParticleSystem(new PVector(position.x, windowSillHeight), width*3/4 + 150, plant, glass);
+    waterSystem = new WaterSystem(new PVector(position.x, windowSillHeight), width*3/4 + 150, plant, glass);
 
     wateringCanImage = loadImage("wateringCan.png");
     wateringCanImage.resize(0, 160);
 
-    wateringCan = new WateringCan(new PVector(width*3/4 + wateringCanImage.height/2, windowSillHeight - wateringCanImage.height/2 - 60), particleSystem, wateringCanImage, windows);
+    wateringCan = new WateringCan(new PVector(width*3/4 + wateringCanImage.height/2, windowSillHeight - wateringCanImage.height/2 - 60), waterSystem, wateringCanImage, windows);
   }
 
   void display() { //displays everything that is inside the room
@@ -47,14 +47,14 @@ class Room {
     drawBackground();
     windows.display();
     plant.display();
-    particleSystem.display();
+    waterSystem.display();
     glass.display();
     if (!wateringCan.isOutside()) wateringCan.display(); //if the watering can is inside it will be displayed in front of everything
   }
 
   void update() { //updates everything
     plant.update();
-    particleSystem.update();
+    waterSystem.update();
     wateringCan.update();
     glass.update();
   }
