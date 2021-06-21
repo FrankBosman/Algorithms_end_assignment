@@ -14,8 +14,7 @@ class PlantSegment {
   PVector position;
   float segmentLength;
   float growAnimation;
-  int growTime;
-  ; //in frames
+  int growTime; //in frames
 
   PlantSegment segmentBellow;
   ArrayList<PlantSegment> segmentsAbove = new ArrayList<PlantSegment>();

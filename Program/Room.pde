@@ -75,7 +75,7 @@ class Room {
   }
 
   void scroll(float scroll) {
-    wateringCan.rotateWateringCan2(scroll);
+    wateringCan.rotateWateringCanScroll(scroll);
   }
 
   void drawBackground() { //draws the background (the wall);

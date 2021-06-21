@@ -101,7 +101,7 @@ class Plant {
   }
 
   void grow() { //this function is resonsible for growing the plant, it adds new segments, this can be normal segments, leafs or the flower.
-    if (isGrowning && frameCount % GROW_INTERVAL == 0 && hydratedTimer > 0) {
+    if (isGrowning && growTimer <= 0 && hydratedTimer > 0) {
 
       //update the timers
       growTimer = GROW_INTERVAL;
@@ -123,7 +123,7 @@ class Plant {
         }
       }
 
-      //growns the flower on all the growing places
+      //grows the plant on all the growing places
       for (int i = 0; i < growLocations.size() - (createdBranch ? 1 : 0); i++) { //if a branch was created then don't loop until the end.
         int index = growLocations.get(i);
         segments.add(new PlantSegment(SEGMENT_SIZE, segments.get(index), 0, GROW_INTERVAL));

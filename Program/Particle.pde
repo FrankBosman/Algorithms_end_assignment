@@ -14,16 +14,16 @@ class Particle {
   float gravity;
 
   //interaction
-  PVector windowStillPos;
-  float windowStillWidth;
+  PVector windowSillPos;
+  float windowSillWidth;
   Plant plant;
 
   float radius;
 
-  Particle(PVector position, PVector direction, PVector windowStillPos, float windowStillWidth) {
+  Particle(PVector position, PVector direction, PVector windowSillPos, float windowSillWidth) {
     this.position = position.copy();
-    this.windowStillPos = windowStillPos;
-    this.windowStillWidth = windowStillWidth;
+    this.windowSillPos = windowSillPos;
+    this.windowSillWidth = windowSillWidth;
 
     velocity = direction.copy().setMag(random(5, 15));
     gravity = 1;
@@ -41,10 +41,10 @@ class Particle {
   void update() {
     velocity.y += gravity;
 
-    if (position.y >= windowStillPos.y && abs(position.x - windowStillPos.x) <= windowStillWidth/2) {
-      velocity.y = 0;     //remove the velocty in the direction to the still
-      velocity.x *= 0.9;  //add some drag from the still
-      position.y = windowStillPos.y;
+    if (position.y >= windowSillPos.y && abs(position.x - windowSillPos.x) <= windowSillWidth/2) { //if collides with sill
+      velocity.y = 0;     //remove the velocty in the direction to the sill
+      velocity.x *= 0.9;  //add some drag from the sill
+      position.y = windowSillPos.y;
       lifespan -= 2;//lower the life more quickly
     } 
 

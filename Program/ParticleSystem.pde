@@ -6,16 +6,16 @@
 
 class ParticleSystem {
   ArrayList<Particle> particles;
-  PVector windowStillPos;
-  float windowStillWidth;
+  PVector windowSillPos;
+  float windowSillWidth;
   Plant plant;
   Glass glass;
 
-  ParticleSystem(PVector windowStillPos, float windowStillWidth, Plant plant, Glass glass) {
+  ParticleSystem(PVector windowSillPos, float windowSillWidth, Plant plant, Glass glass) {
     particles = new ArrayList<Particle>();
 
-    this.windowStillPos = windowStillPos;
-    this.windowStillWidth = windowStillWidth;
+    this.windowSillPos = windowSillPos;
+    this.windowSillWidth = windowSillWidth;
     this.plant = plant;
     this.glass = glass;
   }
@@ -57,6 +57,6 @@ class ParticleSystem {
     offset.limit(nozzleWidth/2);
     direction.rotate(map(randomGaussian()/2, -1.5, 1.5, -PI/8, PI/8)); 
 
-    particles.add(new Particle(new PVector(position.x + offset.x, position.y + offset.y), direction, windowStillPos, windowStillWidth));
+    particles.add(new Particle(new PVector(position.x + offset.x, position.y + offset.y), direction, windowSillPos, windowSillWidth));
   }
 }

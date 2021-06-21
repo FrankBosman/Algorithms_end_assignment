@@ -6,6 +6,8 @@
 
 class WateringCan {
   static final float NOZZLE_WIDTH = 54.45;
+  static final float MIN_ROTATION = 0;
+  static final float MAX_ROTATION = -PI/3;
 
   //movement
   PVector velocity;
@@ -106,35 +108,21 @@ class WateringCan {
     isSelected = false;
   }
 
-  void rotateWateringCan() { //rotates the watering can if it is near the plant
-    float minRotation = 0;
-    float maxRotation = radians(-60);
-
-
+  void rotateWateringCan() { //rotates the watering can back if released
     if (!isSelected) {
       angle += rotationSpeed * 2;
-      if (angle > minRotation) angle = minRotation;
+      if (angle > MIN_ROTATION) angle = MIN_ROTATION;
     } 
 
-    if (angle == maxRotation) isWatering = true;
+    if (angle == MAX_ROTATION) isWatering = true;
     else isWatering = false;
+
+    if (angle < MAX_ROTATION) angle = MAX_ROTATION;
+    if (angle > MIN_ROTATION) angle = MIN_ROTATION;
   }
 
-  void rotateWateringCan2(float scroll) {
-    float minRotation = 0;
-    float maxRotation = radians(-60);
+  void rotateWateringCanScroll(float scroll) {
     angle -= scroll * 0.1;
-
-    if (!isSelected) {
-      angle += rotationSpeed * 2;
-      if (angle > minRotation) angle = minRotation;
-    } 
-
-    if (angle < maxRotation) angle = maxRotation;
-    if (angle > minRotation) angle = minRotation;
-
-    if (angle == maxRotation) isWatering = true;
-    else isWatering = false;
   }
 
   boolean isOnWindowSill() {//checks if the watering can is standing on the window sill
@@ -154,13 +142,6 @@ class WateringCan {
       x < position.x + wateringCanImage.width/2 + positionOffSetX && 
       y > position.y - wateringCanImage.height/2 + positionOffSetY && 
       y < position.y + wateringCanImage.height/2 + positionOffSetY);
-  }
-
-  boolean nearPlant() { //checks if the watering can is near the plant
-    return position.x > width*3/8 + wateringCanImage.width/2 &&
-      position.x < width*5/8 + wateringCanImage.width/4 &&
-      position.y > height/8 &&
-      position.y < height*5/8;
   }
 
   boolean isInsideWindow() { //checks if the watering can is inside the left window
