@@ -5,7 +5,6 @@
  */
 
 class Bird {
-
   //movement and flocking
   static final float SPEED_FACTOR = 20;
   PVector position;
