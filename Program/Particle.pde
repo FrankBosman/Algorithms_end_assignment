@@ -41,7 +41,7 @@ class Particle {
   void update() {
     velocity.y += gravity;
 
-    if (position.y >= windowSillPos.y && abs(position.x - windowSillPos.x) <= windowSillWidth/2) { //if collides with sill
+    if (position.y >= windowSillPos.y && abs(position.x - windowSillPos.x) <= windowSillWidth/2) { //collide with sill
       velocity.y = 0;     //remove the velocty in the direction to the sill
       velocity.x *= 0.9;  //add some drag from the sill
       position.y = windowSillPos.y;
