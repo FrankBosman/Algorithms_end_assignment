@@ -137,7 +137,7 @@ class WateringCan {
       return  position.x - 9 > width/8 - 85 &&
         position.x - 119 < width*7/8 + 85 &&
         position.y >= startPosition.y &&
-        position.y < startPosition.y + 10;
+        position.y < startPosition.y + 20;
     }
   }
 
