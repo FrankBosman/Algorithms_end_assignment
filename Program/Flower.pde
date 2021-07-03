@@ -1,5 +1,5 @@
 
-/*  -- Leaf Class --
+/*  -- Flower Class --
  *  This Class displays the flower and manages the growing animation 
  */
 
