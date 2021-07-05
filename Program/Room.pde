@@ -26,7 +26,7 @@ class Room {
       flowerImages[i] = loadImage("Flowers/flower" + i + ".png");
       flowerImages[i].resize(100, 0);
     }
-    
+
     tulipImage = loadImage("tulip.png");
     tulipImage.resize(0, 300);
 
@@ -50,7 +50,7 @@ class Room {
     drawBackground();
     windows.display();
 
-    for(Plant plant : plants){
+    for (Plant plant : plants) {
       plant.display();
     }
     waterSystem.display();
@@ -59,7 +59,7 @@ class Room {
   }
 
   void update() { //updates everything
-    for(Plant plant : plants){
+    for (Plant plant : plants) {
       plant.update();
     }
     waterSystem.update(plants, glass);

@@ -28,7 +28,7 @@ class WaterSystem {
       particle.update();
 
       //test if the particle hit a flower pot, and hydrate that plant
-      for(Plant plant : plants){
+      for (Plant plant : plants) {
         if (plant.isInFlowerPot(particle.getPos())) {
           plant.hydrate();
           particle.kill();

@@ -1,3 +1,4 @@
+
 /*  -- WaterSegment Class --
  *  This Class displays, the water at the points and interact with the other segments through surface. 
  *  Adapted from topic 6 assignment 6.6, made by Ysbrand Burgstede, Frank Bosman.

@@ -11,7 +11,7 @@
  *    -water vase
  *    -a few eastereggs
  */
- 
+
 import java.util.Map;
 import java.io.File;
 
@@ -23,7 +23,7 @@ void setup() {
   size(1800, 900, P2D);
   rectMode(CENTER);
   imageMode(CENTER);
-  
+
   room = new Room(new PVector(width/2, height/2));
   outside = new Outside();
 }
@@ -32,13 +32,13 @@ void draw() {
   background(100);
   outside.update();
   outside.display();
-  
+
   room.update();
   room.display();
 
   //test if keydown
-  if(keyDown){
-    if(key == ' '){
+  if (keyDown) {
+    if (key == ' ') {
       room.scroll(0.5);
     }
   }
@@ -64,7 +64,7 @@ void mouseWheel(MouseEvent event) {
   room.scroll(e);
 }
 
-void keyPressed(){
+void keyPressed() {
   keyDown = true;
 }
 

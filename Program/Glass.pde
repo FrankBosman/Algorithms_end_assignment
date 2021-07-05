@@ -35,7 +35,7 @@ class Glass {
     //water
     surface.display();
     pushMatrix();
-    translate(position.x,position.y);
+    translate(position.x, position.y);
     strokeWeight(STROKE_WEIGHT);
     stroke(174, 232, 240);    //light blue
     fill(174, 232, 240, 100); //light blue
@@ -60,7 +60,7 @@ class Glass {
     }
   }
 
-  boolean addForceToSurface(float x, float y, int dist, float multiplier){
+  boolean addForceToSurface(float x, float y, int dist, float multiplier) {
     return surface.addAreaForce(x, y, dist, multiplier);
   }
 }
