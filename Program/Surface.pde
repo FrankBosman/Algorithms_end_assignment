@@ -9,10 +9,12 @@ class Surface {
   PVector pos;
   PVector waterSize;
   ArrayList<WaterSegment> segments = new ArrayList<WaterSegment>();
+  float maxLevelHeight;
 
-  Surface(PVector pos, float initWidth, float initHeight, int segmentSize) {
+  Surface(PVector pos, float initWidth, float initHeight, int segmentSize, float maxLevelHeight) {
     for (int i = 0; i < int(initWidth / segmentSize); i++) {//setup the segments that will form the water
       segments.add(new WaterSegment(new PVector(segmentSize/2 + i*segmentSize, 0), segmentSize, this));
+      this.maxLevelHeight = maxLevelHeight;
     }
 
     this.pos = pos;
@@ -39,7 +41,7 @@ class Surface {
     translate(pos.x, pos.y);   
     beginShape();
     noStroke();
-    fill(0, 64, 128, 150);
+    fill(0, 64, 200, 150);
     vertex(0, levelHeight);
     for (WaterSegment segment : segments) {
       segment.display();
@@ -60,7 +62,7 @@ class Surface {
         hit = true;
       }
     }
-    if (hit) levelHeight -= 0.1; //increase the water level
+    if (hit && levelHeight > -maxLevelHeight) levelHeight -= 0.1; //increase the water level
     return hit;
   }
 

@@ -17,7 +17,7 @@ class Glass {
   Glass(PVector position, PImage tulipImage) {
     this.position = position.add(0, -GLASS_HEIGHT/2 - STROKE_WEIGHT/2); //move the pos coordinate so the glass sits on the given coordinate
     this.tulipImage = tulipImage;
-    surface = new Surface(PVector.add(position, new PVector(-GLASS_WIDTH/2 + STROKE_WEIGHT/2, -STROKE_WEIGHT)), GLASS_WIDTH - STROKE_WEIGHT, GLASS_HEIGHT/2, 2); //creates the surface that handles the water
+    surface = new Surface(PVector.add(position, new PVector(-GLASS_WIDTH/2 + STROKE_WEIGHT/2, -STROKE_WEIGHT/2)), GLASS_WIDTH - STROKE_WEIGHT, GLASS_HEIGHT/2, 2, GLASS_HEIGHT/2 - STROKE_WEIGHT); //creates the surface that handles the water
   }
 
   void display() {
@@ -30,19 +30,20 @@ class Glass {
     image(tulipImage, 0, -tulipImage.height/3);
     rotate(-PI/8);  
     image(tulipImage, 0, -tulipImage.height/3);
-
     popMatrix();
-
+    popMatrix();
+    //water
+    surface.display();
+    pushMatrix();
+    translate(position.x,position.y);
     strokeWeight(STROKE_WEIGHT);
     stroke(174, 232, 240);    //light blue
-    fill(174, 232, 240, 127); //light blue
+    fill(174, 232, 240, 100); //light blue
     rect(0, 0, GLASS_WIDTH, GLASS_HEIGHT, 5, 5, 10, 10);
 
     popMatrix();
     //reset strokeWeight
     strokeWeight(1);
-
-    surface.display();
   }
 
   void update() {
