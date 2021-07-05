@@ -41,8 +41,8 @@ class Plant {
   // HashMap<String,color> colors = new HashMap<String,color>();
   color[] colorsBrown = {color(155, 83, 0), color(144, 76, 1), color(180, 105, 22), color(164, 97, 19)};
   color[] colorsBlue = {color(106, 196, 184), color(79, 160, 143), color(114, 211, 192), color(106, 200, 182)};
-  color[] colorsYellow = {color(246,197,0), color(234,175,13), color(255,226,65), color(255,206,12)};
-  color[] colorsRed = {color(208,78,88), color(187,67,77), color(223,102,117), color(218,92,96)};
+  color[] colorsYellow = {color(246, 197, 0), color(234, 175, 13), color(255, 226, 65), color(255, 206, 12)};
+  color[] colorsRed = {color(208, 78, 88), color(187, 67, 77), color(223, 102, 117), color(218, 92, 96)};
   color[] currentColorPallet = new color[4];
 
   Plant(float x, float y, int startAmount, PImage[] flowerImages, Windows windows) {
@@ -68,16 +68,24 @@ class Plant {
     isGrowning = true;
     branchChance = 2; //50%
     intervalSinceBranch = 0;
-    previousDirection = (int(random(0,2)) == 0) ? "Right" : "Left";
+    previousDirection = (int(random(0, 2)) == 0) ? "Right" : "Left";
     hydratedTimer = 0;   
     mainBranchSize = 30 + int(random(-10, 10));
 
     //colors
-    switch (int(random(0,4))) {
-      case 0: currentColorPallet = colorsBrown; break;
-      case 1: currentColorPallet = colorsBlue; break;
-      case 2: currentColorPallet = colorsYellow; break;
-      case 3: currentColorPallet = colorsRed; break;      
+    switch (int(random(0, 4))) {
+    case 0: 
+      currentColorPallet = colorsBrown; 
+      break;
+    case 1: 
+      currentColorPallet = colorsBlue; 
+      break;
+    case 2: 
+      currentColorPallet = colorsYellow; 
+      break;
+    case 3: 
+      currentColorPallet = colorsRed; 
+      break;
     }
 
     flowerPotWidth = width/24;
