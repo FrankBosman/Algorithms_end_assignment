@@ -23,7 +23,7 @@ class Room {
 
     windowSillHeight = height*7/8 + 30;
     for (int i = 0; i < flowerImages.length; i ++) {
-      flowerImages[i] = loadImage("flower" + i + ".png");
+      flowerImages[i] = loadImage("Flowers/flower" + i + ".png");
       flowerImages[i].resize(100, 0);
     }
     tulipImage = loadImage("tulip.png");
