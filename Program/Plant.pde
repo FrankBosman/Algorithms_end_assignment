@@ -23,7 +23,6 @@ class Plant {
   String previousDirection;
   int mainBranchSize;
 
-
   //growing
   int growTimer;
   boolean isGrowning; //if the plant is still growing its branches
@@ -47,7 +46,6 @@ class Plant {
   color[] currentColorPallet = new color[4];
 
   Plant(float x, float y, int startAmount, PImage[] flowerImages, Windows windows) {
-
     //constructs the main branch
     for (int i = 0; i < startAmount; i++) { 
       PlantSegment segmentBellow = null;

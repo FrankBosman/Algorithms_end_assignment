@@ -26,6 +26,7 @@ class Room {
       flowerImages[i] = loadImage("Flowers/flower" + i + ".png");
       flowerImages[i].resize(100, 0);
     }
+    
     tulipImage = loadImage("tulip.png");
     tulipImage.resize(0, 300);
 
