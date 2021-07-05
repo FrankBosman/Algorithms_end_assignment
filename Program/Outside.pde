@@ -11,7 +11,7 @@ class Outside {
 
   Outside() {
     //loads the images
-    landscape = loadImage("landscape2.png");
+    landscape = loadImage("Landscape/landscape2.png");
     landscape.resize(width*7/8, 0);
 
     for (int i = 1; i <= 9; i++) {
