@@ -8,17 +8,26 @@ class Leaf extends PlantSegment {
   float leafSize;
   float maxLeafSize;
   color leafColor;
+  color[] leafColors = new color[4];
   int cooldown;
 
   Leaf(float segmentLength, PlantSegment segmentBellow, float offsetAngle) {
     super(segmentLength, segmentBellow, offsetAngle, int(ANIMATION_TIME));
     leafSize = 0;
     maxLeafSize = segmentLength*10;
-    leafColor = color(132, 191, 3);
+    for (int i = 2; i < 10; i += 2) {
+      leafColors[-1 + i/2] = color (110 + i*2, 140 + i*6, 20 + i*4);
+    }
+    //leafColors[0] = color(102, 143, 30);
+    //leafColors[1] = color(132, 193, 36);
+    //leafColors[2] = color(141, 206, 38);
+    //leafColors[3] = color(115, 168, 31);
+    leafColor = leafColors[int(random(leafColors.length))];
     cooldown = growTime;
   }
 
   void display() {
+    println(red(leafColors[0]), green(leafColors[0]), blue(leafColors[0]));
     pushMatrix();
     translate(position.x, position.y);
     rotate(totalAngle); //rotates the segment to match the flowers' rotation
