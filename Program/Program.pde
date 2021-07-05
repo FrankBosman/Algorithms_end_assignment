@@ -12,9 +12,6 @@
  *    -a few eastereggs
  */
 
-import java.util.Map;
-import java.io.File;
-
 Outside outside;
 Room room;
 boolean keyDown;
