@@ -38,7 +38,7 @@ class PlantSegment {
 
     //segmentColor = color(94, 135, 5); //green
     //segmentColor = color(88, 129, 24); //green
-    segmentColor = color(110, 140, 20); //green
+    segmentColor = color(100, 130, 10); //green
     position = new PVector();
 
     angle = 0;
