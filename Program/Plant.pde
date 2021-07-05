@@ -124,7 +124,7 @@ class Plant {
 
       boolean createdBranch = false; //check if a branch was created, if that's the case then don't also grow it
 
-      if (branchesLengths.get(0) < float(mainBranchSize) * 0.8 && intervalSinceBranch >= BRANCH_INTERVAL) { //don't spawn a branch at the top
+      if (branchesLengths.get(0) < float(mainBranchSize) * 0.7 && intervalSinceBranch >= BRANCH_INTERVAL) { //don't spawn a branch at the top
         if (int(random(0, branchChance)) == 0) { //small chance to create a new branch
           int index = growLocations.get(0);
           if (previousDirection.equals("Right")) previousDirection = "Left";
